@@ -1,0 +1,39 @@
+{
+  "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+  "load": {
+    "kind": "load",
+    "at": "2026-10-17T06:17:27.372Z",
+    "yunetLoadMs": 212,
+    "sfaceLoadMs": 191.5,
+    "heapBytes": 45808361,
+    "storageBytes": 53626785,
+    "id": 1
+  },
+  "control": {
+    "kind": "control",
+    "at": "2026-10-17T06:17:27.761Z",
+    "faces": 0,
+    "detectionMs": 197.89999999850988,
+    "embeddingMs": 0,
+    "comparisonMs": 0,
+    "controlDimensions": 128,
+    "controlSfaceMs": 89.5,
+    "heapBytes": 54598534,
+    "storageBytes": 53700513,
+    "id": 2
+  },
+  "offline": {
+    "kind": "control",
+    "at": "2026-10-17T06:17:29.703Z",
+    "faces": 0,
+    "detectionMs": 77.19999999925494,
+    "embeddingMs": 0,
+    "comparisonMs": 0,
+    "controlDimensions": 128,
+    "controlSfaceMs": 86.30000000074506,
+    "heapBytes": 59648423,
+    "storageBytes": 55053453,
+    "id": 5
+  },
+  "warning": "Cámara sintética de Chromium; no validación facial ni Android"
+}

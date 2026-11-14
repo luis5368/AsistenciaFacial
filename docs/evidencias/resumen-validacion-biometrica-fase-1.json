@@ -1,0 +1,383 @@
+{
+  "method": "Exact ordered full-row prefixes (canonical key order), no deduplication within blocks",
+  "totalRowsInFiles": 190,
+  "uniqueRows": 67,
+  "overlappingRows": 123,
+  "uniqueOperation": {
+    "legacy_unspecified": 15,
+    "load": 1,
+    "recognition": 49,
+    "enrollment": 2
+  },
+  "uniqueOutcome": {
+    "legacy_unknown": 15,
+    "loaded": 1,
+    "no_profiles": 3,
+    "enrolled": 2,
+    "unknown": 21,
+    "candidate": 25
+  },
+  "files": [
+    {
+      "name": "mediciones-fase-1.json",
+      "sha256": "9c7d148d2d3df358d7789756919fb64ddb87e40593d1cb574306a923a2b689dc",
+      "model": "yunet-2023mar_sface-2021dec",
+      "rows": 28,
+      "overlap": 0,
+      "newRows": 28,
+      "range": [
+        1,
+        28
+      ],
+      "operation": {
+        "legacy_unspecified": 15,
+        "load": 1,
+        "recognition": 10,
+        "enrollment": 2
+      },
+      "outcome": {
+        "legacy_unknown": 15,
+        "loaded": 1,
+        "no_profiles": 3,
+        "enrolled": 2,
+        "unknown": 6,
+        "candidate": 1
+      },
+      "scenario": {
+        "unspecified": 28
+      },
+      "humanReview": {
+        "not_reviewed": 28
+      },
+      "offlineDeclared": {
+        "null": 15,
+        "true": 10,
+        "false": 3
+      },
+      "onlineStart": {
+        "null": 15,
+        "true": 13
+      },
+      "onlineEnd": {
+        "null": 15,
+        "true": 13
+      },
+      "sw": {
+        "null": 15,
+        "true": 13
+      },
+      "executed": 7,
+      "threshold": {
+        "0.5": 7
+      },
+      "comparedCount": {
+        "1": 7
+      },
+      "margin": {
+        "0.05": 7
+      },
+      "cosine": {
+        "n": 7,
+        "mean": 0.3483121228053133,
+        "min": 0.15186713911772817,
+        "max": 0.5883034308288095,
+        "median": 0.32744208697631344,
+        "p95NearestRank": 0.5883034308288095
+      },
+      "detectionMs": {
+        "n": 7,
+        "mean": 80.87142857483455,
+        "min": 49.80000001192093,
+        "max": 115.30000001192093,
+        "median": 79.70000004768372,
+        "p95NearestRank": 115.30000001192093
+      },
+      "embeddingMs": {
+        "n": 7,
+        "mean": 80.24285714115415,
+        "min": 52.30000001192093,
+        "max": 91.09999996423721,
+        "median": 82.69999998807907,
+        "p95NearestRank": 91.09999996423721
+      },
+      "comparisonMs": {
+        "n": 7,
+        "mean": 0.05714285373687744,
+        "min": 0,
+        "max": 0.30000001192092896,
+        "median": 0,
+        "p95NearestRank": 0.30000001192092896
+      },
+      "pipelineMs": {
+        "n": 7,
+        "mean": 161.17142856972558,
+        "min": 102.10000002384186,
+        "max": 206.69999998807907,
+        "median": 162.4000000357628,
+        "p95NearestRank": 206.69999998807907
+      },
+      "zeroComparison": 5
+    },
+    {
+      "name": "mediciones-fase-2.json",
+      "sha256": "a36d02c9f3a0632e2a7b9a7767fbc2a427f7b260e144c1bf53f7b9400b068168",
+      "model": "yunet-2023mar_sface-2021dec",
+      "rows": 40,
+      "overlap": 28,
+      "newRows": 12,
+      "range": [
+        29,
+        40
+      ],
+      "operation": {
+        "recognition": 12
+      },
+      "outcome": {
+        "candidate": 12
+      },
+      "scenario": {
+        "unspecified": 12
+      },
+      "humanReview": {
+        "not_reviewed": 12
+      },
+      "offlineDeclared": {
+        "false": 12
+      },
+      "onlineStart": {
+        "true": 12
+      },
+      "onlineEnd": {
+        "true": 12
+      },
+      "sw": {
+        "true": 12
+      },
+      "executed": 12,
+      "threshold": {
+        "0.5": 12
+      },
+      "comparedCount": {
+        "1": 12
+      },
+      "margin": {
+        "0.05": 12
+      },
+      "cosine": {
+        "n": 12,
+        "mean": 0.9287791246685141,
+        "min": 0.8569212828573176,
+        "max": 0.9558403499213718,
+        "median": 0.9394269883058417,
+        "p95NearestRank": 0.9558403499213718
+      },
+      "detectionMs": {
+        "n": 12,
+        "mean": 77.9750000089407,
+        "min": 70.19999998807907,
+        "max": 87.80000001192093,
+        "median": 77.5,
+        "p95NearestRank": 87.80000001192093
+      },
+      "embeddingMs": {
+        "n": 12,
+        "mean": 81.7749999910593,
+        "min": 77,
+        "max": 86.89999997615814,
+        "median": 82.09999996423721,
+        "p95NearestRank": 86.89999997615814
+      },
+      "comparisonMs": {
+        "n": 12,
+        "mean": 0.07500000298023224,
+        "min": 0,
+        "max": 0.19999998807907104,
+        "median": 0.09999999403953552,
+        "p95NearestRank": 0.19999998807907104
+      },
+      "pipelineMs": {
+        "n": 12,
+        "mean": 159.82500000298023,
+        "min": 152.0999999642372,
+        "max": 171.5,
+        "median": 159.69999998807907,
+        "p95NearestRank": 171.5
+      },
+      "zeroComparison": 5
+    },
+    {
+      "name": "mediciones-fase-3.json",
+      "sha256": "31fff54f290211e6559c2c1ff3991b54adcd468286f2a0426dba4eb10d7e3e89",
+      "model": "yunet-2023mar_sface-2021dec",
+      "rows": 55,
+      "overlap": 40,
+      "newRows": 15,
+      "range": [
+        41,
+        55
+      ],
+      "operation": {
+        "recognition": 15
+      },
+      "outcome": {
+        "unknown": 15
+      },
+      "scenario": {
+        "unspecified": 15
+      },
+      "humanReview": {
+        "not_reviewed": 15
+      },
+      "offlineDeclared": {
+        "false": 15
+      },
+      "onlineStart": {
+        "true": 15
+      },
+      "onlineEnd": {
+        "true": 15
+      },
+      "sw": {
+        "true": 15
+      },
+      "executed": 15,
+      "threshold": {
+        "0.5": 15
+      },
+      "comparedCount": {
+        "1": 15
+      },
+      "margin": {
+        "0.05": 15
+      },
+      "cosine": {
+        "n": 15,
+        "mean": 0.16214675024863773,
+        "min": 0.12414207333362488,
+        "max": 0.20175350358989208,
+        "median": 0.16156037051278999,
+        "p95NearestRank": 0.20175350358989208
+      },
+      "detectionMs": {
+        "n": 15,
+        "mean": 78.37999999920527,
+        "min": 69.89999997615814,
+        "max": 82.80000001192093,
+        "median": 78.30000001192093,
+        "p95NearestRank": 82.80000001192093
+      },
+      "embeddingMs": {
+        "n": 15,
+        "mean": 85.12666666905085,
+        "min": 79.69999998807907,
+        "max": 102,
+        "median": 82.30000001192093,
+        "p95NearestRank": 102
+      },
+      "comparisonMs": {
+        "n": 15,
+        "mean": 0.0066666682561238606,
+        "min": 0,
+        "max": 0.10000002384185791,
+        "median": 0,
+        "p95NearestRank": 0.10000002384185791
+      },
+      "pipelineMs": {
+        "n": 15,
+        "mean": 163.51333333651226,
+        "min": 151,
+        "max": 183,
+        "median": 162.80000001192093,
+        "p95NearestRank": 183
+      },
+      "zeroComparison": 14
+    },
+    {
+      "name": "mediciones-fase-4 sin red.json",
+      "sha256": "cb22946b70850f83f880b3c790aed0cf3b9c39318af02609b6d858299c043968",
+      "model": "yunet-2023mar_sface-2021dec",
+      "rows": 67,
+      "overlap": 55,
+      "newRows": 12,
+      "range": [
+        56,
+        67
+      ],
+      "operation": {
+        "recognition": 12
+      },
+      "outcome": {
+        "candidate": 12
+      },
+      "scenario": {
+        "unspecified": 12
+      },
+      "humanReview": {
+        "not_reviewed": 12
+      },
+      "offlineDeclared": {
+        "true": 12
+      },
+      "onlineStart": {
+        "true": 12
+      },
+      "onlineEnd": {
+        "true": 12
+      },
+      "sw": {
+        "true": 12
+      },
+      "executed": 12,
+      "threshold": {
+        "0.5": 12
+      },
+      "comparedCount": {
+        "1": 12
+      },
+      "margin": {
+        "0.05": 12
+      },
+      "cosine": {
+        "n": 12,
+        "mean": 0.9013711926110571,
+        "min": 0.8714671862845522,
+        "max": 0.9166037793065536,
+        "median": 0.9023548350233414,
+        "p95NearestRank": 0.9166037793065536
+      },
+      "detectionMs": {
+        "n": 12,
+        "mean": 81.79166667163372,
+        "min": 68.80000001192093,
+        "max": 107.60000002384186,
+        "median": 78.40000000596046,
+        "p95NearestRank": 107.60000002384186
+      },
+      "embeddingMs": {
+        "n": 12,
+        "mean": 86.07499999304612,
+        "min": 83.39999997615814,
+        "max": 89.09999996423721,
+        "median": 86.00000002980232,
+        "p95NearestRank": 89.09999996423721
+      },
+      "comparisonMs": {
+        "n": 12,
+        "mean": 0.008333335320154825,
+        "min": 0,
+        "max": 0.10000002384185791,
+        "median": 0,
+        "p95NearestRank": 0.10000002384185791
+      },
+      "pipelineMs": {
+        "n": 12,
+        "mean": 167.875,
+        "min": 154.5999999642372,
+        "max": 196.69999998807907,
+        "median": 164.2000000178814,
+        "p95NearestRank": 196.69999998807907
+      },
+      "zeroComparison": 11
+    }
+  ]
+}

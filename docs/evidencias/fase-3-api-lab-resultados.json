@@ -1,0 +1,394 @@
+{
+  "date": "2026-11-14T06:18:22.886Z",
+  "database": "asistencia_facial_api_lab",
+  "checks": [
+    {
+      "name": "identidad real migrador y dos clientes app",
+      "result": "PASS"
+    },
+    {
+      "name": "historial y checksums",
+      "result": "PASS"
+    },
+    {
+      "name": "14 tablas RLS ENABLE/FORCE",
+      "result": "PASS"
+    },
+    {
+      "name": "permisos efectivos protegidos",
+      "result": "PASS"
+    },
+    {
+      "name": "sin CREATE",
+      "result": "PASS"
+    },
+    {
+      "name": "sin contexto no revela instituciones",
+      "result": "PASS"
+    },
+    {
+      "name": "RLS institucion A",
+      "result": "PASS"
+    },
+    {
+      "name": "RLS institucion B",
+      "result": "PASS"
+    },
+    {
+      "name": "RLS sin contexto despues de transacciones",
+      "result": "PASS"
+    },
+    {
+      "name": "pool A",
+      "result": "PASS"
+    },
+    {
+      "name": "pool sin contexto",
+      "result": "PASS"
+    },
+    {
+      "name": "pool B",
+      "result": "PASS"
+    },
+    {
+      "name": "pool sin contexto",
+      "result": "PASS"
+    },
+    {
+      "name": "misma conexion reutilizada",
+      "result": "PASS"
+    },
+    {
+      "name": "login real A",
+      "result": "PASS"
+    },
+    {
+      "name": "sesion institucional A",
+      "result": "PASS"
+    },
+    {
+      "name": "cookie HttpOnly A",
+      "result": "PASS"
+    },
+    {
+      "name": "login real B",
+      "result": "PASS"
+    },
+    {
+      "name": "sesion institucional B",
+      "result": "PASS"
+    },
+    {
+      "name": "cookie HttpOnly B",
+      "result": "PASS"
+    },
+    {
+      "name": "cookie de A se envia a otro puerto pero B rechaza",
+      "result": "PASS"
+    },
+    {
+      "name": "credenciales invalidas genericas",
+      "result": "PASS"
+    },
+    {
+      "name": "credenciales invalidas genericas",
+      "result": "PASS"
+    },
+    {
+      "name": "credenciales invalidas genericas",
+      "result": "PASS"
+    },
+    {
+      "name": "CSRF ausente",
+      "result": "PASS"
+    },
+    {
+      "name": "ADMIN lista usuarios",
+      "result": "PASS"
+    },
+    {
+      "name": "institucion B no visible",
+      "result": "PASS"
+    },
+    {
+      "name": "login docente",
+      "result": "PASS"
+    },
+    {
+      "name": "TEACHER no administra",
+      "result": "PASS"
+    },
+    {
+      "name": "solo estudiante asignado",
+      "result": "PASS"
+    },
+    {
+      "name": "asignacion inactiva excluida",
+      "result": "PASS"
+    },
+    {
+      "name": "ultimo ADMIN dos clientes una confirmacion",
+      "result": "PASS"
+    },
+    {
+      "name": "ultimo ADMIN rechazo",
+      "result": "PASS"
+    },
+    {
+      "name": "un ADMIN permanece",
+      "result": "PASS"
+    },
+    {
+      "name": "ETag concurrente un COMMIT",
+      "result": "PASS"
+    },
+    {
+      "name": "ETag obsoleto",
+      "result": "PASS"
+    },
+    {
+      "name": "rollback conserva usuario",
+      "result": "PASS"
+    },
+    {
+      "name": "rollback sin revocacion",
+      "result": "PASS"
+    },
+    {
+      "name": "sesion docente despues rollback",
+      "result": "PASS"
+    },
+    {
+      "name": "desactivacion confirmada rechaza sesion",
+      "result": "PASS"
+    },
+    {
+      "name": "cambio clave real",
+      "result": "PASS"
+    },
+    {
+      "name": "auditoria cambio clave",
+      "result": "PASS"
+    },
+    {
+      "name": "sesion revocada tras clave",
+      "result": "PASS"
+    },
+    {
+      "name": "login nueva clave",
+      "result": "PASS"
+    },
+    {
+      "name": "logout",
+      "result": "PASS"
+    },
+    {
+      "name": "cookie eliminada",
+      "result": "PASS"
+    },
+    {
+      "name": "caducidad reloj controlado con repositorio real",
+      "result": "PASS"
+    },
+    {
+      "name": "nuevo almacen rechaza token anterior",
+      "result": "PASS"
+    },
+    {
+      "name": "logs tecnicos sin secretos",
+      "result": "PASS"
+    }
+  ],
+  "fixturesCommitted": true,
+  "tables": [
+    {
+      "relname": "attendance_corrections",
+      "relrowsecurity": true,
+      "relforcerowsecurity": true
+    },
+    {
+      "relname": "attendances",
+      "relrowsecurity": true,
+      "relforcerowsecurity": true
+    },
+    {
+      "relname": "audit_events",
+      "relrowsecurity": true,
+      "relforcerowsecurity": true
+    },
+    {
+      "relname": "biometric_consents",
+      "relrowsecurity": true,
+      "relforcerowsecurity": true
+    },
+    {
+      "relname": "biometric_template_metadata",
+      "relrowsecurity": true,
+      "relforcerowsecurity": true
+    },
+    {
+      "relname": "class_sessions",
+      "relrowsecurity": true,
+      "relforcerowsecurity": true
+    },
+    {
+      "relname": "devices",
+      "relrowsecurity": true,
+      "relforcerowsecurity": true
+    },
+    {
+      "relname": "enrollments",
+      "relrowsecurity": true,
+      "relforcerowsecurity": true
+    },
+    {
+      "relname": "groups",
+      "relrowsecurity": true,
+      "relforcerowsecurity": true
+    },
+    {
+      "relname": "institutions",
+      "relrowsecurity": true,
+      "relforcerowsecurity": true
+    },
+    {
+      "relname": "students",
+      "relrowsecurity": true,
+      "relforcerowsecurity": true
+    },
+    {
+      "relname": "teacher_assignments",
+      "relrowsecurity": true,
+      "relforcerowsecurity": true
+    },
+    {
+      "relname": "teachers",
+      "relrowsecurity": true,
+      "relforcerowsecurity": true
+    },
+    {
+      "relname": "users",
+      "relrowsecurity": true,
+      "relforcerowsecurity": true
+    }
+  ],
+  "permissions": [
+    {
+      "tablename": "_prisma_migrations",
+      "sel": false,
+      "del": false,
+      "trunc": false,
+      "upd": false
+    },
+    {
+      "tablename": "attendance_corrections",
+      "sel": true,
+      "del": false,
+      "trunc": false,
+      "upd": false
+    },
+    {
+      "tablename": "attendances",
+      "sel": true,
+      "del": false,
+      "trunc": false,
+      "upd": false
+    },
+    {
+      "tablename": "audit_events",
+      "sel": true,
+      "del": false,
+      "trunc": false,
+      "upd": false
+    },
+    {
+      "tablename": "biometric_consents",
+      "sel": true,
+      "del": false,
+      "trunc": false,
+      "upd": true
+    },
+    {
+      "tablename": "biometric_template_metadata",
+      "sel": false,
+      "del": false,
+      "trunc": false,
+      "upd": false
+    },
+    {
+      "tablename": "class_sessions",
+      "sel": true,
+      "del": false,
+      "trunc": false,
+      "upd": true
+    },
+    {
+      "tablename": "devices",
+      "sel": true,
+      "del": false,
+      "trunc": false,
+      "upd": true
+    },
+    {
+      "tablename": "enrollments",
+      "sel": true,
+      "del": false,
+      "trunc": false,
+      "upd": true
+    },
+    {
+      "tablename": "groups",
+      "sel": true,
+      "del": false,
+      "trunc": false,
+      "upd": true
+    },
+    {
+      "tablename": "institutions",
+      "sel": true,
+      "del": false,
+      "trunc": false,
+      "upd": true
+    },
+    {
+      "tablename": "students",
+      "sel": true,
+      "del": false,
+      "trunc": false,
+      "upd": true
+    },
+    {
+      "tablename": "teacher_assignments",
+      "sel": true,
+      "del": false,
+      "trunc": false,
+      "upd": true
+    },
+    {
+      "tablename": "teachers",
+      "sel": true,
+      "del": false,
+      "trunc": false,
+      "upd": true
+    },
+    {
+      "tablename": "users",
+      "sel": true,
+      "del": false,
+      "trunc": false,
+      "upd": true
+    }
+  ],
+  "browser": "157.0.8103.51",
+  "fixtureCounts": {
+    "institutions": 2,
+    "users": 8,
+    "teachers": 4,
+    "groups": 4,
+    "students": 4,
+    "enrollments": 4,
+    "assignments": 4
+  },
+  "tlsException": "ignoreHTTPSErrors solo en contextos Playwright; no confianza Windows ni desactivacion global",
+  "completed": true
+}

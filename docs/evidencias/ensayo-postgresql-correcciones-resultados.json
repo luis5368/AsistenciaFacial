@@ -1,0 +1,1526 @@
+{
+  "runId": "f31d3b73-519d-4866-9013-53dec478d208",
+  "startedAt": "2026-11-14T01:24:40.748Z",
+  "database": "asistencia_facial_sandbox",
+  "tests": [
+    {
+      "name": "Conexiones reales separadas y propietario",
+      "status": "passed",
+      "detail": {
+        "migrator": "asistencia_migrator",
+        "application": "asistencia_app",
+        "owner": "asistencia_migrator"
+      }
+    },
+    {
+      "name": "Inventario físico completo",
+      "status": "passed"
+    },
+    {
+      "name": "Dos instituciones ficticias creadas con app",
+      "status": "passed"
+    },
+    {
+      "name": "Sin contexto: cero filas para app y migrador bajo FORCE RLS",
+      "status": "passed"
+    },
+    {
+      "name": "INSERT sin contexto denegado por RLS",
+      "status": "passed",
+      "detail": {
+        "sqlstate": "42501"
+      }
+    },
+    {
+      "name": "A no ve ni modifica B; ambos roles están sujetos a RLS",
+      "status": "passed"
+    },
+    {
+      "name": "INSERT cruzado denegado por RLS",
+      "status": "passed",
+      "detail": {
+        "sqlstate": "42501"
+      }
+    },
+    {
+      "name": "FK impide referencia a estudiante de otro colegio",
+      "status": "passed",
+      "detail": {
+        "sqlstate": "23503"
+      }
+    },
+    {
+      "name": "CHECK rechaza periodo invertido",
+      "status": "passed",
+      "detail": {
+        "sqlstate": "23514",
+        "constraint": "sessions_valid_period"
+      }
+    },
+    {
+      "name": "Prisma real: pool de una conexión no conserva contexto tras commit/rollback",
+      "status": "passed",
+      "detail": {
+        "sameBackendPid": 20896,
+        "withoutContextCount": 0
+      }
+    },
+    {
+      "name": "Registro real y reintento con hash canónico",
+      "status": "passed"
+    },
+    {
+      "name": "UUID duplicado rechazado por índice",
+      "status": "passed",
+      "detail": {
+        "sqlstate": "23505",
+        "constraint": "attendances_institution_id_event_uuid_key"
+      }
+    },
+    {
+      "name": "Asistencia activa única con otro UUID",
+      "status": "passed",
+      "detail": {
+        "sqlstate": "23505",
+        "constraint": "attendances_one_active_per_session"
+      }
+    },
+    {
+      "name": "Corrección sin auditoría falla al COMMIT y revierte",
+      "status": "passed",
+      "detail": {
+        "sqlstate": "P0001"
+      }
+    },
+    {
+      "name": "Corrección y auditoría consistentes confirman",
+      "status": "passed"
+    },
+    {
+      "name": "App bloqueada: CREATE TABLE",
+      "status": "passed",
+      "detail": {
+        "sqlstate": "42501"
+      }
+    },
+    {
+      "name": "App bloqueada: DROP TABLE",
+      "status": "passed",
+      "detail": {
+        "sqlstate": "42501"
+      }
+    },
+    {
+      "name": "App bloqueada: ALTER TABLE",
+      "status": "passed",
+      "detail": {
+        "sqlstate": "42501"
+      }
+    },
+    {
+      "name": "App bloqueada: TRUNCATE historial",
+      "status": "passed",
+      "detail": {
+        "sqlstate": "42501"
+      }
+    },
+    {
+      "name": "App bloqueada: DELETE auditoría",
+      "status": "passed",
+      "detail": {
+        "sqlstate": "42501"
+      }
+    },
+    {
+      "name": "App bloqueada: UPDATE auditoría",
+      "status": "passed",
+      "detail": {
+        "sqlstate": "42501"
+      }
+    },
+    {
+      "name": "App bloqueada: DELETE correcciones",
+      "status": "passed",
+      "detail": {
+        "sqlstate": "42501"
+      }
+    },
+    {
+      "name": "App bloqueada: UPDATE correcciones",
+      "status": "passed",
+      "detail": {
+        "sqlstate": "42501"
+      }
+    },
+    {
+      "name": "Migrador puede DDL en sandbox; rollback no deja tabla",
+      "status": "passed"
+    },
+    {
+      "name": "Trigger protege auditoría incluso frente a UPDATE del dueño",
+      "status": "passed",
+      "detail": {
+        "sqlstate": "P0001"
+      }
+    },
+    {
+      "name": "Contenido original inmutable también para migrador",
+      "status": "passed",
+      "detail": {
+        "sqlstate": "P0001"
+      }
+    },
+    {
+      "name": "Reinscripcion conserva episodio previo y admite intervalo contiguo",
+      "status": "passed"
+    },
+    {
+      "name": "Fallo de transacción revierte escritura previa",
+      "status": "passed",
+      "detail": {
+        "sqlstate": "22012"
+      }
+    },
+    {
+      "name": "Concurrencia: mismo UUID",
+      "status": "passed",
+      "detail": {
+        "commits": 1,
+        "rejected": 1,
+        "sqlstate": "23505",
+        "constraint": "attendances_institution_id_event_uuid_key"
+      }
+    },
+    {
+      "name": "Concurrencia: misma asistencia activa",
+      "status": "passed",
+      "detail": {
+        "commits": 1,
+        "rejected": 1,
+        "sqlstate": "23505",
+        "constraint": "attendances_one_active_per_session"
+      }
+    },
+    {
+      "name": "Corrección aislada rechazada al COMMIT",
+      "status": "passed",
+      "detail": {
+        "sqlstate": "P0001"
+      }
+    },
+    {
+      "name": "Corrección y auditoría sin transición rechazadas al COMMIT",
+      "status": "passed",
+      "detail": {
+        "sqlstate": "P0001"
+      }
+    },
+    {
+      "name": "Auditoría aislada rechazada al COMMIT",
+      "status": "passed",
+      "detail": {
+        "sqlstate": "P0001"
+      }
+    },
+    {
+      "name": "Transición e historial sin auditoría rechazados",
+      "status": "passed",
+      "detail": {
+        "sqlstate": "P0001"
+      }
+    },
+    {
+      "name": "Actor de auditoría distinto al de corrección rechazado",
+      "status": "passed",
+      "detail": {
+        "sqlstate": "P0001"
+      }
+    },
+    {
+      "name": "Historial con estados distintos a transición real rechazado",
+      "status": "passed",
+      "detail": {
+        "sqlstate": "P0001"
+      }
+    },
+    {
+      "name": "Segunda transición de una asistencia en una transacción rechazada",
+      "status": "passed",
+      "detail": {
+        "sqlstate": "P0001"
+      }
+    },
+    {
+      "name": "Historial no puede falsificar transaction id",
+      "status": "passed",
+      "detail": {
+        "sqlstate": "P0001"
+      }
+    },
+    {
+      "name": "Corrección legítima admite historial antes de UPDATE con constraints diferidas",
+      "status": "passed"
+    },
+    {
+      "name": "Reintento de UUID de corrección no crea otro historial",
+      "status": "passed"
+    },
+    {
+      "name": "Versiones obsoletas no actualizan asistencia",
+      "status": "passed"
+    },
+    {
+      "name": "Concurrencia de correcciones: solo una transición confirmada",
+      "status": "passed",
+      "detail": {
+        "committed": 1,
+        "stale": 1
+      }
+    },
+    {
+      "name": "Matrícula superpuesta rechazada",
+      "status": "passed",
+      "detail": {
+        "sqlstate": "23P01"
+      }
+    },
+    {
+      "name": "Modificar periodo para superponerlo también se rechaza",
+      "status": "passed",
+      "detail": {
+        "sqlstate": "23P01"
+      }
+    },
+    {
+      "name": "Acortar matrícula no puede invalidar asistencia histórica",
+      "status": "passed",
+      "detail": {
+        "sqlstate": "23514"
+      }
+    },
+    {
+      "name": "Identidad del episodio histórico es inmutable",
+      "status": "passed",
+      "detail": {
+        "sqlstate": "P0001"
+      }
+    },
+    {
+      "name": "Asistencia queda vinculada al nuevo episodio; histórico preservado",
+      "status": "passed"
+    },
+    {
+      "name": "Asistencia fuera del episodio es rechazada antes de duplicados",
+      "status": "passed",
+      "detail": {
+        "sqlstate": "23514"
+      }
+    },
+    {
+      "name": "Fin exclusivo del episodio no acepta una asistencia en ese instante",
+      "status": "passed",
+      "detail": {
+        "sqlstate": "23514"
+      }
+    },
+    {
+      "name": "Matrículas concurrentes sin solape: READ COMMITTED",
+      "status": "passed",
+      "detail": {
+        "commits": 1,
+        "rejected": 1,
+        "sqlstate": "23P01"
+      }
+    },
+    {
+      "name": "Matrículas concurrentes sin solape: REPEATABLE READ",
+      "status": "passed",
+      "detail": {
+        "commits": 1,
+        "rejected": 1,
+        "sqlstate": "40001"
+      }
+    },
+    {
+      "name": "Migrador tampoco puede insertar corrección aislada",
+      "status": "passed"
+    }
+  ],
+  "findings": [],
+  "inventory": {
+    "tables": [
+      {
+        "relname": "attendance_corrections",
+        "owner": "asistencia_migrator",
+        "relrowsecurity": true,
+        "relforcerowsecurity": true
+      },
+      {
+        "relname": "attendances",
+        "owner": "asistencia_migrator",
+        "relrowsecurity": true,
+        "relforcerowsecurity": true
+      },
+      {
+        "relname": "audit_events",
+        "owner": "asistencia_migrator",
+        "relrowsecurity": true,
+        "relforcerowsecurity": true
+      },
+      {
+        "relname": "biometric_consents",
+        "owner": "asistencia_migrator",
+        "relrowsecurity": true,
+        "relforcerowsecurity": true
+      },
+      {
+        "relname": "biometric_template_metadata",
+        "owner": "asistencia_migrator",
+        "relrowsecurity": true,
+        "relforcerowsecurity": true
+      },
+      {
+        "relname": "class_sessions",
+        "owner": "asistencia_migrator",
+        "relrowsecurity": true,
+        "relforcerowsecurity": true
+      },
+      {
+        "relname": "devices",
+        "owner": "asistencia_migrator",
+        "relrowsecurity": true,
+        "relforcerowsecurity": true
+      },
+      {
+        "relname": "enrollments",
+        "owner": "asistencia_migrator",
+        "relrowsecurity": true,
+        "relforcerowsecurity": true
+      },
+      {
+        "relname": "groups",
+        "owner": "asistencia_migrator",
+        "relrowsecurity": true,
+        "relforcerowsecurity": true
+      },
+      {
+        "relname": "institutions",
+        "owner": "asistencia_migrator",
+        "relrowsecurity": true,
+        "relforcerowsecurity": true
+      },
+      {
+        "relname": "students",
+        "owner": "asistencia_migrator",
+        "relrowsecurity": true,
+        "relforcerowsecurity": true
+      },
+      {
+        "relname": "teacher_assignments",
+        "owner": "asistencia_migrator",
+        "relrowsecurity": true,
+        "relforcerowsecurity": true
+      },
+      {
+        "relname": "teachers",
+        "owner": "asistencia_migrator",
+        "relrowsecurity": true,
+        "relforcerowsecurity": true
+      },
+      {
+        "relname": "users",
+        "owner": "asistencia_migrator",
+        "relrowsecurity": true,
+        "relforcerowsecurity": true
+      }
+    ],
+    "enums": [
+      {
+        "typname": "AttendanceStatus",
+        "enumlabel": "ACTIVE"
+      },
+      {
+        "typname": "AttendanceStatus",
+        "enumlabel": "VOID"
+      },
+      {
+        "typname": "ConsentStatus",
+        "enumlabel": "GRANTED"
+      },
+      {
+        "typname": "ConsentStatus",
+        "enumlabel": "REVOKED"
+      },
+      {
+        "typname": "CorrectionReason",
+        "enumlabel": "REGISTRATION_ERROR"
+      },
+      {
+        "typname": "CorrectionReason",
+        "enumlabel": "REVIEW_CONFIRMED"
+      },
+      {
+        "typname": "SessionStatus",
+        "enumlabel": "PLANNED"
+      },
+      {
+        "typname": "SessionStatus",
+        "enumlabel": "OPEN"
+      },
+      {
+        "typname": "SessionStatus",
+        "enumlabel": "CLOSED"
+      },
+      {
+        "typname": "SessionStatus",
+        "enumlabel": "CANCELLED"
+      },
+      {
+        "typname": "TemplateStatus",
+        "enumlabel": "DISABLED"
+      },
+      {
+        "typname": "TemplateStatus",
+        "enumlabel": "REVOKED"
+      },
+      {
+        "typname": "UserRole",
+        "enumlabel": "ADMIN"
+      },
+      {
+        "typname": "UserRole",
+        "enumlabel": "TEACHER"
+      }
+    ],
+    "constraints": [
+      {
+        "conname": "attendance_correction_required",
+        "contype": "t",
+        "definition": "TRIGGER DEFERRABLE INITIALLY DEFERRED"
+      },
+      {
+        "conname": "attendance_corrections_actor_id_not_null",
+        "contype": "n",
+        "definition": "NOT NULL actor_id"
+      },
+      {
+        "conname": "attendance_corrections_attendance_id_not_null",
+        "contype": "n",
+        "definition": "NOT NULL attendance_id"
+      },
+      {
+        "conname": "attendance_corrections_from_status_not_null",
+        "contype": "n",
+        "definition": "NOT NULL from_status"
+      },
+      {
+        "conname": "attendance_corrections_from_version_not_null",
+        "contype": "n",
+        "definition": "NOT NULL from_version"
+      },
+      {
+        "conname": "attendance_corrections_id_not_null",
+        "contype": "n",
+        "definition": "NOT NULL id"
+      },
+      {
+        "conname": "attendance_corrections_institution_id_actor_id_fkey",
+        "contype": "f",
+        "definition": "FOREIGN KEY (institution_id, actor_id) REFERENCES users(institution_id, id) ON UPDATE RESTRICT ON DELETE RESTRICT"
+      },
+      {
+        "conname": "attendance_corrections_institution_id_attendance_id_fkey",
+        "contype": "f",
+        "definition": "FOREIGN KEY (institution_id, attendance_id) REFERENCES attendances(institution_id, id) ON UPDATE RESTRICT ON DELETE RESTRICT"
+      },
+      {
+        "conname": "attendance_corrections_institution_id_not_null",
+        "contype": "n",
+        "definition": "NOT NULL institution_id"
+      },
+      {
+        "conname": "attendance_corrections_pkey",
+        "contype": "p",
+        "definition": "PRIMARY KEY (institution_id, id)"
+      },
+      {
+        "conname": "attendance_corrections_reason_not_null",
+        "contype": "n",
+        "definition": "NOT NULL reason"
+      },
+      {
+        "conname": "attendance_corrections_recorded_at_not_null",
+        "contype": "n",
+        "definition": "NOT NULL recorded_at"
+      },
+      {
+        "conname": "attendance_corrections_to_status_not_null",
+        "contype": "n",
+        "definition": "NOT NULL to_status"
+      },
+      {
+        "conname": "attendance_corrections_to_version_not_null",
+        "contype": "n",
+        "definition": "NOT NULL to_version"
+      },
+      {
+        "conname": "attendance_corrections_transition_txid_not_null",
+        "contype": "n",
+        "definition": "NOT NULL transition_txid"
+      },
+      {
+        "conname": "attendances_created_by_not_null",
+        "contype": "n",
+        "definition": "NOT NULL created_by"
+      },
+      {
+        "conname": "attendances_device_id_not_null",
+        "contype": "n",
+        "definition": "NOT NULL device_id"
+      },
+      {
+        "conname": "attendances_enrollment_id_not_null",
+        "contype": "n",
+        "definition": "NOT NULL enrollment_id"
+      },
+      {
+        "conname": "attendances_episode_fkey",
+        "contype": "f",
+        "definition": "FOREIGN KEY (institution_id, enrollment_id, student_id, group_id) REFERENCES enrollments(institution_id, id, student_id, group_id) ON UPDATE RESTRICT ON DELETE RESTRICT"
+      },
+      {
+        "conname": "attendances_event_uuid_not_null",
+        "contype": "n",
+        "definition": "NOT NULL event_uuid"
+      },
+      {
+        "conname": "attendances_group_id_not_null",
+        "contype": "n",
+        "definition": "NOT NULL group_id"
+      },
+      {
+        "conname": "attendances_hash",
+        "contype": "c",
+        "definition": "CHECK ((payload_hash ~ '^[0-9a-f]{64}$'::text))"
+      },
+      {
+        "conname": "attendances_id_not_null",
+        "contype": "n",
+        "definition": "NOT NULL id"
+      },
+      {
+        "conname": "attendances_institution_id_created_by_fkey",
+        "contype": "f",
+        "definition": "FOREIGN KEY (institution_id, created_by) REFERENCES users(institution_id, id) ON UPDATE RESTRICT ON DELETE RESTRICT"
+      },
+      {
+        "conname": "attendances_institution_id_device_id_fkey",
+        "contype": "f",
+        "definition": "FOREIGN KEY (institution_id, device_id) REFERENCES devices(institution_id, id) ON UPDATE RESTRICT ON DELETE RESTRICT"
+      },
+      {
+        "conname": "attendances_institution_id_not_null",
+        "contype": "n",
+        "definition": "NOT NULL institution_id"
+      },
+      {
+        "conname": "attendances_institution_id_session_id_group_id_fkey",
+        "contype": "f",
+        "definition": "FOREIGN KEY (institution_id, session_id, group_id) REFERENCES class_sessions(institution_id, id, group_id) ON UPDATE RESTRICT ON DELETE RESTRICT"
+      },
+      {
+        "conname": "attendances_manual_v1",
+        "contype": "c",
+        "definition": "CHECK ((((method)::text = 'manual'::text) AND (schema_version = 1)))"
+      },
+      {
+        "conname": "attendances_method_not_null",
+        "contype": "n",
+        "definition": "NOT NULL method"
+      },
+      {
+        "conname": "attendances_occurred_at_client_not_null",
+        "contype": "n",
+        "definition": "NOT NULL occurred_at_client"
+      },
+      {
+        "conname": "attendances_payload_hash_not_null",
+        "contype": "n",
+        "definition": "NOT NULL payload_hash"
+      },
+      {
+        "conname": "attendances_pkey",
+        "contype": "p",
+        "definition": "PRIMARY KEY (institution_id, id)"
+      },
+      {
+        "conname": "attendances_received_at_server_not_null",
+        "contype": "n",
+        "definition": "NOT NULL received_at_server"
+      },
+      {
+        "conname": "attendances_schema_version_not_null",
+        "contype": "n",
+        "definition": "NOT NULL schema_version"
+      },
+      {
+        "conname": "attendances_session_id_not_null",
+        "contype": "n",
+        "definition": "NOT NULL session_id"
+      },
+      {
+        "conname": "attendances_status_not_null",
+        "contype": "n",
+        "definition": "NOT NULL status"
+      },
+      {
+        "conname": "attendances_student_id_not_null",
+        "contype": "n",
+        "definition": "NOT NULL student_id"
+      },
+      {
+        "conname": "attendances_version",
+        "contype": "c",
+        "definition": "CHECK ((version >= 1))"
+      },
+      {
+        "conname": "attendances_version_not_null",
+        "contype": "n",
+        "definition": "NOT NULL version"
+      },
+      {
+        "conname": "audit_correction_pair",
+        "contype": "c",
+        "definition": "CHECK ((((action)::text = 'attendance.corrected'::text) = ((resource_type)::text = 'attendance_correction'::text)))"
+      },
+      {
+        "conname": "audit_events_action_not_null",
+        "contype": "n",
+        "definition": "NOT NULL action"
+      },
+      {
+        "conname": "audit_events_actor_id_not_null",
+        "contype": "n",
+        "definition": "NOT NULL actor_id"
+      },
+      {
+        "conname": "audit_events_id_not_null",
+        "contype": "n",
+        "definition": "NOT NULL id"
+      },
+      {
+        "conname": "audit_events_institution_id_actor_id_fkey",
+        "contype": "f",
+        "definition": "FOREIGN KEY (institution_id, actor_id) REFERENCES users(institution_id, id) ON UPDATE RESTRICT ON DELETE RESTRICT"
+      },
+      {
+        "conname": "audit_events_institution_id_not_null",
+        "contype": "n",
+        "definition": "NOT NULL institution_id"
+      },
+      {
+        "conname": "audit_events_pkey",
+        "contype": "p",
+        "definition": "PRIMARY KEY (institution_id, id)"
+      },
+      {
+        "conname": "audit_events_recorded_at_not_null",
+        "contype": "n",
+        "definition": "NOT NULL recorded_at"
+      },
+      {
+        "conname": "audit_events_resource_id_not_null",
+        "contype": "n",
+        "definition": "NOT NULL resource_id"
+      },
+      {
+        "conname": "audit_events_resource_type_not_null",
+        "contype": "n",
+        "definition": "NOT NULL resource_type"
+      },
+      {
+        "conname": "audit_requires_correction",
+        "contype": "t",
+        "definition": "TRIGGER DEFERRABLE INITIALLY DEFERRED"
+      },
+      {
+        "conname": "biometric_consents_evidence_ref_not_null",
+        "contype": "n",
+        "definition": "NOT NULL evidence_ref"
+      },
+      {
+        "conname": "biometric_consents_expires_at_not_null",
+        "contype": "n",
+        "definition": "NOT NULL expires_at"
+      },
+      {
+        "conname": "biometric_consents_granted_at_not_null",
+        "contype": "n",
+        "definition": "NOT NULL granted_at"
+      },
+      {
+        "conname": "biometric_consents_id_not_null",
+        "contype": "n",
+        "definition": "NOT NULL id"
+      },
+      {
+        "conname": "biometric_consents_institution_id_not_null",
+        "contype": "n",
+        "definition": "NOT NULL institution_id"
+      },
+      {
+        "conname": "biometric_consents_institution_id_recorded_by_fkey",
+        "contype": "f",
+        "definition": "FOREIGN KEY (institution_id, recorded_by) REFERENCES users(institution_id, id) ON UPDATE RESTRICT ON DELETE RESTRICT"
+      },
+      {
+        "conname": "biometric_consents_institution_id_student_id_fkey",
+        "contype": "f",
+        "definition": "FOREIGN KEY (institution_id, student_id) REFERENCES students(institution_id, id) ON UPDATE RESTRICT ON DELETE RESTRICT"
+      },
+      {
+        "conname": "biometric_consents_notice_version_not_null",
+        "contype": "n",
+        "definition": "NOT NULL notice_version"
+      },
+      {
+        "conname": "biometric_consents_pkey",
+        "contype": "p",
+        "definition": "PRIMARY KEY (institution_id, id)"
+      },
+      {
+        "conname": "biometric_consents_recorded_by_not_null",
+        "contype": "n",
+        "definition": "NOT NULL recorded_by"
+      },
+      {
+        "conname": "biometric_consents_status_not_null",
+        "contype": "n",
+        "definition": "NOT NULL status"
+      },
+      {
+        "conname": "biometric_consents_student_id_not_null",
+        "contype": "n",
+        "definition": "NOT NULL student_id"
+      },
+      {
+        "conname": "biometric_template_metadata_consent_id_not_null",
+        "contype": "n",
+        "definition": "NOT NULL consent_id"
+      },
+      {
+        "conname": "biometric_template_metadata_created_at_not_null",
+        "contype": "n",
+        "definition": "NOT NULL created_at"
+      },
+      {
+        "conname": "biometric_template_metadata_id_not_null",
+        "contype": "n",
+        "definition": "NOT NULL id"
+      },
+      {
+        "conname": "biometric_template_metadata_institution_id_consent_id_stud_fkey",
+        "contype": "f",
+        "definition": "FOREIGN KEY (institution_id, consent_id, student_id) REFERENCES biometric_consents(institution_id, id, student_id) ON UPDATE RESTRICT ON DELETE RESTRICT"
+      },
+      {
+        "conname": "biometric_template_metadata_institution_id_not_null",
+        "contype": "n",
+        "definition": "NOT NULL institution_id"
+      },
+      {
+        "conname": "biometric_template_metadata_model_name_not_null",
+        "contype": "n",
+        "definition": "NOT NULL model_name"
+      },
+      {
+        "conname": "biometric_template_metadata_model_version_not_null",
+        "contype": "n",
+        "definition": "NOT NULL model_version"
+      },
+      {
+        "conname": "biometric_template_metadata_pkey",
+        "contype": "p",
+        "definition": "PRIMARY KEY (institution_id, id)"
+      },
+      {
+        "conname": "biometric_template_metadata_status_not_null",
+        "contype": "n",
+        "definition": "NOT NULL status"
+      },
+      {
+        "conname": "biometric_template_metadata_student_id_not_null",
+        "contype": "n",
+        "definition": "NOT NULL student_id"
+      },
+      {
+        "conname": "class_sessions_ends_at_not_null",
+        "contype": "n",
+        "definition": "NOT NULL ends_at"
+      },
+      {
+        "conname": "class_sessions_group_id_not_null",
+        "contype": "n",
+        "definition": "NOT NULL group_id"
+      },
+      {
+        "conname": "class_sessions_id_not_null",
+        "contype": "n",
+        "definition": "NOT NULL id"
+      },
+      {
+        "conname": "class_sessions_institution_id_group_id_fkey",
+        "contype": "f",
+        "definition": "FOREIGN KEY (institution_id, group_id) REFERENCES groups(institution_id, id) ON UPDATE RESTRICT ON DELETE RESTRICT"
+      },
+      {
+        "conname": "class_sessions_institution_id_not_null",
+        "contype": "n",
+        "definition": "NOT NULL institution_id"
+      },
+      {
+        "conname": "class_sessions_pkey",
+        "contype": "p",
+        "definition": "PRIMARY KEY (institution_id, id)"
+      },
+      {
+        "conname": "class_sessions_starts_at_not_null",
+        "contype": "n",
+        "definition": "NOT NULL starts_at"
+      },
+      {
+        "conname": "class_sessions_status_not_null",
+        "contype": "n",
+        "definition": "NOT NULL status"
+      },
+      {
+        "conname": "consents_valid_period",
+        "contype": "c",
+        "definition": "CHECK (((expires_at > granted_at) AND ((revoked_at IS NULL) OR (revoked_at >= granted_at)) AND (((status = 'GRANTED'::\"ConsentStatus\") AND (revoked_at IS NULL)) OR ((status = 'REVOKED'::\"ConsentStatus\") AND (revoked_at IS NOT NULL)))))"
+      },
+      {
+        "conname": "correction_requires_transition",
+        "contype": "t",
+        "definition": "TRIGGER DEFERRABLE INITIALLY DEFERRED"
+      },
+      {
+        "conname": "corrections_transition",
+        "contype": "c",
+        "definition": "CHECK (((from_version >= 1) AND (to_version = (from_version + 1)) AND (from_status <> to_status)))"
+      },
+      {
+        "conname": "devices_assigned_user_id_not_null",
+        "contype": "n",
+        "definition": "NOT NULL assigned_user_id"
+      },
+      {
+        "conname": "devices_expires_at_not_null",
+        "contype": "n",
+        "definition": "NOT NULL expires_at"
+      },
+      {
+        "conname": "devices_id_not_null",
+        "contype": "n",
+        "definition": "NOT NULL id"
+      },
+      {
+        "conname": "devices_institution_id_assigned_user_id_fkey",
+        "contype": "f",
+        "definition": "FOREIGN KEY (institution_id, assigned_user_id) REFERENCES users(institution_id, id) ON UPDATE RESTRICT ON DELETE RESTRICT"
+      },
+      {
+        "conname": "devices_institution_id_not_null",
+        "contype": "n",
+        "definition": "NOT NULL institution_id"
+      },
+      {
+        "conname": "devices_pkey",
+        "contype": "p",
+        "definition": "PRIMARY KEY (institution_id, id)"
+      },
+      {
+        "conname": "enrollments_finite_period",
+        "contype": "c",
+        "definition": "CHECK ((isfinite(starts_at) AND ((ends_at IS NULL) OR isfinite(ends_at))))"
+      },
+      {
+        "conname": "enrollments_group_id_not_null",
+        "contype": "n",
+        "definition": "NOT NULL group_id"
+      },
+      {
+        "conname": "enrollments_id_not_null",
+        "contype": "n",
+        "definition": "NOT NULL id"
+      },
+      {
+        "conname": "enrollments_institution_id_group_id_fkey",
+        "contype": "f",
+        "definition": "FOREIGN KEY (institution_id, group_id) REFERENCES groups(institution_id, id) ON UPDATE RESTRICT ON DELETE RESTRICT"
+      },
+      {
+        "conname": "enrollments_institution_id_not_null",
+        "contype": "n",
+        "definition": "NOT NULL institution_id"
+      },
+      {
+        "conname": "enrollments_institution_id_student_id_fkey",
+        "contype": "f",
+        "definition": "FOREIGN KEY (institution_id, student_id) REFERENCES students(institution_id, id) ON UPDATE RESTRICT ON DELETE RESTRICT"
+      },
+      {
+        "conname": "enrollments_pkey",
+        "contype": "p",
+        "definition": "PRIMARY KEY (institution_id, id)"
+      },
+      {
+        "conname": "enrollments_starts_at_not_null",
+        "contype": "n",
+        "definition": "NOT NULL starts_at"
+      },
+      {
+        "conname": "enrollments_student_id_not_null",
+        "contype": "n",
+        "definition": "NOT NULL student_id"
+      },
+      {
+        "conname": "enrollments_valid_period",
+        "contype": "c",
+        "definition": "CHECK (((ends_at IS NULL) OR (ends_at > starts_at)))"
+      },
+      {
+        "conname": "groups_grade_not_null",
+        "contype": "n",
+        "definition": "NOT NULL grade"
+      },
+      {
+        "conname": "groups_id_not_null",
+        "contype": "n",
+        "definition": "NOT NULL id"
+      },
+      {
+        "conname": "groups_institution_id_fkey",
+        "contype": "f",
+        "definition": "FOREIGN KEY (institution_id) REFERENCES institutions(id) ON UPDATE RESTRICT ON DELETE RESTRICT"
+      },
+      {
+        "conname": "groups_institution_id_not_null",
+        "contype": "n",
+        "definition": "NOT NULL institution_id"
+      },
+      {
+        "conname": "groups_pkey",
+        "contype": "p",
+        "definition": "PRIMARY KEY (institution_id, id)"
+      },
+      {
+        "conname": "groups_school_year_not_null",
+        "contype": "n",
+        "definition": "NOT NULL school_year"
+      },
+      {
+        "conname": "groups_section_not_null",
+        "contype": "n",
+        "definition": "NOT NULL section"
+      },
+      {
+        "conname": "groups_year_range",
+        "contype": "c",
+        "definition": "CHECK (((school_year >= 2000) AND (school_year <= 2200)))"
+      },
+      {
+        "conname": "institutions_created_at_not_null",
+        "contype": "n",
+        "definition": "NOT NULL created_at"
+      },
+      {
+        "conname": "institutions_id_not_null",
+        "contype": "n",
+        "definition": "NOT NULL id"
+      },
+      {
+        "conname": "institutions_name_not_null",
+        "contype": "n",
+        "definition": "NOT NULL name"
+      },
+      {
+        "conname": "institutions_pkey",
+        "contype": "p",
+        "definition": "PRIMARY KEY (id)"
+      },
+      {
+        "conname": "sessions_valid_period",
+        "contype": "c",
+        "definition": "CHECK ((ends_at > starts_at))"
+      },
+      {
+        "conname": "students_active_not_null",
+        "contype": "n",
+        "definition": "NOT NULL active"
+      },
+      {
+        "conname": "students_full_name_not_null",
+        "contype": "n",
+        "definition": "NOT NULL full_name"
+      },
+      {
+        "conname": "students_id_not_null",
+        "contype": "n",
+        "definition": "NOT NULL id"
+      },
+      {
+        "conname": "students_institution_id_fkey",
+        "contype": "f",
+        "definition": "FOREIGN KEY (institution_id) REFERENCES institutions(id) ON UPDATE RESTRICT ON DELETE RESTRICT"
+      },
+      {
+        "conname": "students_institution_id_not_null",
+        "contype": "n",
+        "definition": "NOT NULL institution_id"
+      },
+      {
+        "conname": "students_pkey",
+        "contype": "p",
+        "definition": "PRIMARY KEY (institution_id, id)"
+      },
+      {
+        "conname": "students_student_code_not_null",
+        "contype": "n",
+        "definition": "NOT NULL student_code"
+      },
+      {
+        "conname": "teacher_assignments_active_not_null",
+        "contype": "n",
+        "definition": "NOT NULL active"
+      },
+      {
+        "conname": "teacher_assignments_group_id_not_null",
+        "contype": "n",
+        "definition": "NOT NULL group_id"
+      },
+      {
+        "conname": "teacher_assignments_institution_id_group_id_fkey",
+        "contype": "f",
+        "definition": "FOREIGN KEY (institution_id, group_id) REFERENCES groups(institution_id, id) ON UPDATE RESTRICT ON DELETE RESTRICT"
+      },
+      {
+        "conname": "teacher_assignments_institution_id_not_null",
+        "contype": "n",
+        "definition": "NOT NULL institution_id"
+      },
+      {
+        "conname": "teacher_assignments_institution_id_teacher_id_fkey",
+        "contype": "f",
+        "definition": "FOREIGN KEY (institution_id, teacher_id) REFERENCES teachers(institution_id, id) ON UPDATE RESTRICT ON DELETE RESTRICT"
+      },
+      {
+        "conname": "teacher_assignments_pkey",
+        "contype": "p",
+        "definition": "PRIMARY KEY (institution_id, teacher_id, group_id)"
+      },
+      {
+        "conname": "teacher_assignments_teacher_id_not_null",
+        "contype": "n",
+        "definition": "NOT NULL teacher_id"
+      },
+      {
+        "conname": "teachers_id_not_null",
+        "contype": "n",
+        "definition": "NOT NULL id"
+      },
+      {
+        "conname": "teachers_institution_id_not_null",
+        "contype": "n",
+        "definition": "NOT NULL institution_id"
+      },
+      {
+        "conname": "teachers_institution_id_user_id_fkey",
+        "contype": "f",
+        "definition": "FOREIGN KEY (institution_id, user_id) REFERENCES users(institution_id, id) ON UPDATE RESTRICT ON DELETE RESTRICT"
+      },
+      {
+        "conname": "teachers_pkey",
+        "contype": "p",
+        "definition": "PRIMARY KEY (institution_id, id)"
+      },
+      {
+        "conname": "teachers_user_id_not_null",
+        "contype": "n",
+        "definition": "NOT NULL user_id"
+      },
+      {
+        "conname": "templates_revocation",
+        "contype": "c",
+        "definition": "CHECK ((((status = 'DISABLED'::\"TemplateStatus\") AND (revoked_at IS NULL)) OR ((status = 'REVOKED'::\"TemplateStatus\") AND (revoked_at IS NOT NULL))))"
+      },
+      {
+        "conname": "users_active_not_null",
+        "contype": "n",
+        "definition": "NOT NULL active"
+      },
+      {
+        "conname": "users_created_at_not_null",
+        "contype": "n",
+        "definition": "NOT NULL created_at"
+      },
+      {
+        "conname": "users_email_canonical",
+        "contype": "c",
+        "definition": "CHECK ((((email)::text = lower(btrim((email)::text))) AND (length((email)::text) > 3)))"
+      },
+      {
+        "conname": "users_email_not_null",
+        "contype": "n",
+        "definition": "NOT NULL email"
+      },
+      {
+        "conname": "users_id_not_null",
+        "contype": "n",
+        "definition": "NOT NULL id"
+      },
+      {
+        "conname": "users_institution_id_fkey",
+        "contype": "f",
+        "definition": "FOREIGN KEY (institution_id) REFERENCES institutions(id) ON UPDATE RESTRICT ON DELETE RESTRICT"
+      },
+      {
+        "conname": "users_institution_id_not_null",
+        "contype": "n",
+        "definition": "NOT NULL institution_id"
+      },
+      {
+        "conname": "users_password_hash_not_null",
+        "contype": "n",
+        "definition": "NOT NULL password_hash"
+      },
+      {
+        "conname": "users_pkey",
+        "contype": "p",
+        "definition": "PRIMARY KEY (institution_id, id)"
+      },
+      {
+        "conname": "users_role_not_null",
+        "contype": "n",
+        "definition": "NOT NULL role"
+      }
+    ],
+    "indexes": [
+      {
+        "indexname": "attendance_corrections_institution_id_actor_id_idx",
+        "indexdef": "CREATE INDEX attendance_corrections_institution_id_actor_id_idx ON public.attendance_corrections USING btree (institution_id, actor_id)"
+      },
+      {
+        "indexname": "attendance_corrections_institution_id_attendance_id_to_vers_key",
+        "indexdef": "CREATE UNIQUE INDEX attendance_corrections_institution_id_attendance_id_to_vers_key ON public.attendance_corrections USING btree (institution_id, attendance_id, to_version)"
+      },
+      {
+        "indexname": "attendance_corrections_pkey",
+        "indexdef": "CREATE UNIQUE INDEX attendance_corrections_pkey ON public.attendance_corrections USING btree (institution_id, id)"
+      },
+      {
+        "indexname": "attendances_institution_id_created_by_idx",
+        "indexdef": "CREATE INDEX attendances_institution_id_created_by_idx ON public.attendances USING btree (institution_id, created_by)"
+      },
+      {
+        "indexname": "attendances_institution_id_device_id_idx",
+        "indexdef": "CREATE INDEX attendances_institution_id_device_id_idx ON public.attendances USING btree (institution_id, device_id)"
+      },
+      {
+        "indexname": "attendances_institution_id_enrollment_id_student_id_group_id_id",
+        "indexdef": "CREATE INDEX attendances_institution_id_enrollment_id_student_id_group_id_id ON public.attendances USING btree (institution_id, enrollment_id, student_id, group_id)"
+      },
+      {
+        "indexname": "attendances_institution_id_event_uuid_key",
+        "indexdef": "CREATE UNIQUE INDEX attendances_institution_id_event_uuid_key ON public.attendances USING btree (institution_id, event_uuid)"
+      },
+      {
+        "indexname": "attendances_institution_id_session_id_group_id_idx",
+        "indexdef": "CREATE INDEX attendances_institution_id_session_id_group_id_idx ON public.attendances USING btree (institution_id, session_id, group_id)"
+      },
+      {
+        "indexname": "attendances_institution_id_student_id_group_id_idx",
+        "indexdef": "CREATE INDEX attendances_institution_id_student_id_group_id_idx ON public.attendances USING btree (institution_id, student_id, group_id)"
+      },
+      {
+        "indexname": "attendances_one_active_per_session",
+        "indexdef": "CREATE UNIQUE INDEX attendances_one_active_per_session ON public.attendances USING btree (institution_id, student_id, session_id) WHERE (status = 'ACTIVE'::\"AttendanceStatus\")"
+      },
+      {
+        "indexname": "attendances_pkey",
+        "indexdef": "CREATE UNIQUE INDEX attendances_pkey ON public.attendances USING btree (institution_id, id)"
+      },
+      {
+        "indexname": "audit_events_institution_id_actor_id_idx",
+        "indexdef": "CREATE INDEX audit_events_institution_id_actor_id_idx ON public.audit_events USING btree (institution_id, actor_id)"
+      },
+      {
+        "indexname": "audit_events_institution_id_resource_type_resource_id_recor_idx",
+        "indexdef": "CREATE INDEX audit_events_institution_id_resource_type_resource_id_recor_idx ON public.audit_events USING btree (institution_id, resource_type, resource_id, recorded_at)"
+      },
+      {
+        "indexname": "audit_events_pkey",
+        "indexdef": "CREATE UNIQUE INDEX audit_events_pkey ON public.audit_events USING btree (institution_id, id)"
+      },
+      {
+        "indexname": "audit_one_per_correction",
+        "indexdef": "CREATE UNIQUE INDEX audit_one_per_correction ON public.audit_events USING btree (institution_id, resource_id) WHERE (((action)::text = 'attendance.corrected'::text) AND ((resource_type)::text = 'attendance_correction'::text))"
+      },
+      {
+        "indexname": "biometric_consents_institution_id_id_student_id_key",
+        "indexdef": "CREATE UNIQUE INDEX biometric_consents_institution_id_id_student_id_key ON public.biometric_consents USING btree (institution_id, id, student_id)"
+      },
+      {
+        "indexname": "biometric_consents_institution_id_recorded_by_idx",
+        "indexdef": "CREATE INDEX biometric_consents_institution_id_recorded_by_idx ON public.biometric_consents USING btree (institution_id, recorded_by)"
+      },
+      {
+        "indexname": "biometric_consents_institution_id_student_id_status_idx",
+        "indexdef": "CREATE INDEX biometric_consents_institution_id_student_id_status_idx ON public.biometric_consents USING btree (institution_id, student_id, status)"
+      },
+      {
+        "indexname": "biometric_consents_pkey",
+        "indexdef": "CREATE UNIQUE INDEX biometric_consents_pkey ON public.biometric_consents USING btree (institution_id, id)"
+      },
+      {
+        "indexname": "biometric_template_metadata_institution_id_consent_id_stude_idx",
+        "indexdef": "CREATE INDEX biometric_template_metadata_institution_id_consent_id_stude_idx ON public.biometric_template_metadata USING btree (institution_id, consent_id, student_id)"
+      },
+      {
+        "indexname": "biometric_template_metadata_pkey",
+        "indexdef": "CREATE UNIQUE INDEX biometric_template_metadata_pkey ON public.biometric_template_metadata USING btree (institution_id, id)"
+      },
+      {
+        "indexname": "class_sessions_institution_id_group_id_starts_at_idx",
+        "indexdef": "CREATE INDEX class_sessions_institution_id_group_id_starts_at_idx ON public.class_sessions USING btree (institution_id, group_id, starts_at)"
+      },
+      {
+        "indexname": "class_sessions_institution_id_id_group_id_key",
+        "indexdef": "CREATE UNIQUE INDEX class_sessions_institution_id_id_group_id_key ON public.class_sessions USING btree (institution_id, id, group_id)"
+      },
+      {
+        "indexname": "class_sessions_pkey",
+        "indexdef": "CREATE UNIQUE INDEX class_sessions_pkey ON public.class_sessions USING btree (institution_id, id)"
+      },
+      {
+        "indexname": "devices_institution_id_assigned_user_id_idx",
+        "indexdef": "CREATE INDEX devices_institution_id_assigned_user_id_idx ON public.devices USING btree (institution_id, assigned_user_id)"
+      },
+      {
+        "indexname": "devices_pkey",
+        "indexdef": "CREATE UNIQUE INDEX devices_pkey ON public.devices USING btree (institution_id, id)"
+      },
+      {
+        "indexname": "enrollments_institution_id_group_id_idx",
+        "indexdef": "CREATE INDEX enrollments_institution_id_group_id_idx ON public.enrollments USING btree (institution_id, group_id)"
+      },
+      {
+        "indexname": "enrollments_institution_id_id_student_id_group_id_key",
+        "indexdef": "CREATE UNIQUE INDEX enrollments_institution_id_id_student_id_group_id_key ON public.enrollments USING btree (institution_id, id, student_id, group_id)"
+      },
+      {
+        "indexname": "enrollments_institution_id_student_id_group_id_starts_at_idx",
+        "indexdef": "CREATE INDEX enrollments_institution_id_student_id_group_id_starts_at_idx ON public.enrollments USING btree (institution_id, student_id, group_id, starts_at)"
+      },
+      {
+        "indexname": "enrollments_pkey",
+        "indexdef": "CREATE UNIQUE INDEX enrollments_pkey ON public.enrollments USING btree (institution_id, id)"
+      },
+      {
+        "indexname": "groups_institution_id_school_year_grade_section_key",
+        "indexdef": "CREATE UNIQUE INDEX groups_institution_id_school_year_grade_section_key ON public.groups USING btree (institution_id, school_year, grade, section)"
+      },
+      {
+        "indexname": "groups_pkey",
+        "indexdef": "CREATE UNIQUE INDEX groups_pkey ON public.groups USING btree (institution_id, id)"
+      },
+      {
+        "indexname": "institutions_pkey",
+        "indexdef": "CREATE UNIQUE INDEX institutions_pkey ON public.institutions USING btree (id)"
+      },
+      {
+        "indexname": "students_institution_id_student_code_key",
+        "indexdef": "CREATE UNIQUE INDEX students_institution_id_student_code_key ON public.students USING btree (institution_id, student_code)"
+      },
+      {
+        "indexname": "students_pkey",
+        "indexdef": "CREATE UNIQUE INDEX students_pkey ON public.students USING btree (institution_id, id)"
+      },
+      {
+        "indexname": "teacher_assignments_institution_id_group_id_idx",
+        "indexdef": "CREATE INDEX teacher_assignments_institution_id_group_id_idx ON public.teacher_assignments USING btree (institution_id, group_id)"
+      },
+      {
+        "indexname": "teacher_assignments_pkey",
+        "indexdef": "CREATE UNIQUE INDEX teacher_assignments_pkey ON public.teacher_assignments USING btree (institution_id, teacher_id, group_id)"
+      },
+      {
+        "indexname": "teachers_institution_id_user_id_key",
+        "indexdef": "CREATE UNIQUE INDEX teachers_institution_id_user_id_key ON public.teachers USING btree (institution_id, user_id)"
+      },
+      {
+        "indexname": "teachers_pkey",
+        "indexdef": "CREATE UNIQUE INDEX teachers_pkey ON public.teachers USING btree (institution_id, id)"
+      },
+      {
+        "indexname": "users_institution_id_email_key",
+        "indexdef": "CREATE UNIQUE INDEX users_institution_id_email_key ON public.users USING btree (institution_id, email)"
+      },
+      {
+        "indexname": "users_pkey",
+        "indexdef": "CREATE UNIQUE INDEX users_pkey ON public.users USING btree (institution_id, id)"
+      }
+    ],
+    "triggers": [
+      {
+        "tgname": "attendance_correction_required",
+        "definition": "CREATE CONSTRAINT TRIGGER attendance_correction_required AFTER UPDATE ON public.attendances DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXECUTE FUNCTION require_attendance_correction()"
+      },
+      {
+        "tgname": "attendance_episode_guard",
+        "definition": "CREATE TRIGGER attendance_episode_guard BEFORE INSERT ON public.attendances FOR EACH ROW EXECUTE FUNCTION guard_attendance_episode()"
+      },
+      {
+        "tgname": "attendance_guard",
+        "definition": "CREATE TRIGGER attendance_guard BEFORE INSERT OR DELETE OR UPDATE ON public.attendances FOR EACH ROW EXECUTE FUNCTION guard_attendance()"
+      },
+      {
+        "tgname": "audit_append_only",
+        "definition": "CREATE TRIGGER audit_append_only BEFORE DELETE OR UPDATE ON public.audit_events FOR EACH ROW EXECUTE FUNCTION forbid_history_mutation()"
+      },
+      {
+        "tgname": "audit_requires_correction",
+        "definition": "CREATE CONSTRAINT TRIGGER audit_requires_correction AFTER INSERT ON public.audit_events DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXECUTE FUNCTION require_audit_correction()"
+      },
+      {
+        "tgname": "correction_append_only",
+        "definition": "CREATE TRIGGER correction_append_only BEFORE DELETE OR UPDATE ON public.attendance_corrections FOR EACH ROW EXECUTE FUNCTION forbid_history_mutation()"
+      },
+      {
+        "tgname": "correction_requires_transition",
+        "definition": "CREATE CONSTRAINT TRIGGER correction_requires_transition AFTER INSERT ON public.attendance_corrections DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXECUTE FUNCTION require_correction_transition()"
+      },
+      {
+        "tgname": "correction_transaction",
+        "definition": "CREATE TRIGGER correction_transaction BEFORE INSERT ON public.attendance_corrections FOR EACH ROW EXECUTE FUNCTION stamp_correction_transaction()"
+      },
+      {
+        "tgname": "enrollment_period_guard",
+        "definition": "CREATE TRIGGER enrollment_period_guard BEFORE INSERT OR UPDATE ON public.enrollments FOR EACH ROW EXECUTE FUNCTION guard_enrollment_period()"
+      }
+    ],
+    "policies": [
+      {
+        "tablename": "attendance_corrections",
+        "policyname": "tenant_scope",
+        "qual": "(institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid)",
+        "with_check": "(institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid)"
+      },
+      {
+        "tablename": "attendances",
+        "policyname": "tenant_scope",
+        "qual": "(institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid)",
+        "with_check": "(institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid)"
+      },
+      {
+        "tablename": "audit_events",
+        "policyname": "tenant_scope",
+        "qual": "(institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid)",
+        "with_check": "(institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid)"
+      },
+      {
+        "tablename": "biometric_consents",
+        "policyname": "tenant_scope",
+        "qual": "(institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid)",
+        "with_check": "(institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid)"
+      },
+      {
+        "tablename": "biometric_template_metadata",
+        "policyname": "tenant_scope",
+        "qual": "(institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid)",
+        "with_check": "(institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid)"
+      },
+      {
+        "tablename": "class_sessions",
+        "policyname": "tenant_scope",
+        "qual": "(institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid)",
+        "with_check": "(institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid)"
+      },
+      {
+        "tablename": "devices",
+        "policyname": "tenant_scope",
+        "qual": "(institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid)",
+        "with_check": "(institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid)"
+      },
+      {
+        "tablename": "enrollments",
+        "policyname": "tenant_scope",
+        "qual": "(institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid)",
+        "with_check": "(institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid)"
+      },
+      {
+        "tablename": "groups",
+        "policyname": "tenant_scope",
+        "qual": "(institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid)",
+        "with_check": "(institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid)"
+      },
+      {
+        "tablename": "institutions",
+        "policyname": "institution_scope",
+        "qual": "(id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid)",
+        "with_check": "(id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid)"
+      },
+      {
+        "tablename": "students",
+        "policyname": "tenant_scope",
+        "qual": "(institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid)",
+        "with_check": "(institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid)"
+      },
+      {
+        "tablename": "teacher_assignments",
+        "policyname": "tenant_scope",
+        "qual": "(institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid)",
+        "with_check": "(institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid)"
+      },
+      {
+        "tablename": "teachers",
+        "policyname": "tenant_scope",
+        "qual": "(institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid)",
+        "with_check": "(institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid)"
+      },
+      {
+        "tablename": "users",
+        "policyname": "tenant_scope",
+        "qual": "(institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid)",
+        "with_check": "(institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid)"
+      }
+    ],
+    "functions": [
+      {
+        "proname": "forbid_history_mutation"
+      },
+      {
+        "proname": "guard_attendance"
+      },
+      {
+        "proname": "guard_attendance_episode"
+      },
+      {
+        "proname": "guard_enrollment_period"
+      },
+      {
+        "proname": "require_attendance_correction"
+      },
+      {
+        "proname": "require_audit_correction"
+      },
+      {
+        "proname": "require_correction_transition"
+      },
+      {
+        "proname": "stamp_correction_transaction"
+      }
+    ]
+  },
+  "finishedAt": "2026-11-14T01:24:42.028Z",
+  "acceptance": "passed"
+}

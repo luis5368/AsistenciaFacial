@@ -1,0 +1,7 @@
+{
+  "command": "prisma migrate deploy",
+  "exitCode": 0,
+  "success": true,
+  "timedOut": false,
+  "finishedAt": "2026-11-14T03:53:17.188Z"
+}

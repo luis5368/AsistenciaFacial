@@ -1,0 +1,34 @@
+{
+  "source": "apps/backend/prisma/migrations/20261113000000_initial_review/migration.sql",
+  "kind": "static_expected_not_database_inventory",
+  "sha256": "dc3a10d34f0d795fabe8ca6f769ccbc54c8e04ba655dc582b6f366a417a471bd",
+  "tables": [
+    "institutions",
+    "users",
+    "students",
+    "teachers",
+    "groups",
+    "enrollments",
+    "teacher_assignments",
+    "class_sessions",
+    "devices",
+    "biometric_consents",
+    "biometric_template_metadata",
+    "attendances",
+    "attendance_corrections",
+    "audit_events"
+  ],
+  "enums": [
+    "UserRole",
+    "AttendanceStatus",
+    "ConsentStatus",
+    "TemplateStatus",
+    "SessionStatus",
+    "CorrectionReason"
+  ],
+  "foreignKeys": 20,
+  "indexes": 24,
+  "checks": 10,
+  "functions": 3,
+  "triggers": 4
+}

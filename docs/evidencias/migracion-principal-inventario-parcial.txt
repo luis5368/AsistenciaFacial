@@ -1,0 +1,640 @@
+BEGIN
+ current_database  | current_user |                                 version                                 | current_setting 
+-------------------+--------------+-------------------------------------------------------------------------+-----------------
+ asistencia_facial | postgres     | PostgreSQL 18.6 on x86_64-windows, compiled by msvc-19.44.35229, 64-bit | on
+(1 row)
+
+           relname           |        owner        | relrowsecurity | relforcerowsecurity 
+-----------------------------+---------------------+----------------+---------------------
+ _prisma_migrations          | asistencia_migrator | f              | f
+ attendance_corrections      | asistencia_migrator | t              | t
+ attendances                 | asistencia_migrator | t              | t
+ audit_events                | asistencia_migrator | t              | t
+ biometric_consents          | asistencia_migrator | t              | t
+ biometric_template_metadata | asistencia_migrator | t              | t
+ class_sessions              | asistencia_migrator | t              | t
+ devices                     | asistencia_migrator | t              | t
+ enrollments                 | asistencia_migrator | t              | t
+ groups                      | asistencia_migrator | t              | t
+ institutions                | asistencia_migrator | t              | t
+ students                    | asistencia_migrator | t              | t
+ teacher_assignments         | asistencia_migrator | t              | t
+ teachers                    | asistencia_migrator | t              | t
+ users                       | asistencia_migrator | t              | t
+(15 rows)
+
+                 migration_name                 |                             checksum                             |          finished_at          | rolled_back_at | applied_steps_count 
+------------------------------------------------+------------------------------------------------------------------+-------------------------------+----------------+---------------------
+ 20261113000000_initial_review                  | dc3a10d34f0d795fabe8ca6f769ccbc54c8e04ba655dc582b6f366a417a471bd | 2026-11-13 21:53:17.135413-06 |                |                   1
+ 20261114000000_corrections_enrollment_episodes | 4fd264537d9399f122b709c0368c51744c7344be03ed0802b671855cb29a6f2b | 2026-11-13 21:53:17.15902-06  |                |                   1
+(2 rows)
+
+         table_name          |    column_name     |        data_type         |     udt_name     | is_nullable |        column_default        
+-----------------------------+--------------------+--------------------------+------------------+-------------+------------------------------
+ attendance_corrections      | institution_id     | uuid                     | uuid             | NO          | 
+ attendance_corrections      | id                 | uuid                     | uuid             | NO          | 
+ attendance_corrections      | attendance_id      | uuid                     | uuid             | NO          | 
+ attendance_corrections      | actor_id           | uuid                     | uuid             | NO          | 
+ attendance_corrections      | from_version       | integer                  | int4             | NO          | 
+ attendance_corrections      | to_version         | integer                  | int4             | NO          | 
+ attendance_corrections      | from_status        | USER-DEFINED             | AttendanceStatus | NO          | 
+ attendance_corrections      | to_status          | USER-DEFINED             | AttendanceStatus | NO          | 
+ attendance_corrections      | reason             | USER-DEFINED             | CorrectionReason | NO          | 
+ attendance_corrections      | recorded_at        | timestamp with time zone | timestamptz      | NO          | CURRENT_TIMESTAMP
+ attendance_corrections      | transition_txid    | bigint                   | int8             | NO          | 0
+ attendances                 | institution_id     | uuid                     | uuid             | NO          | 
+ attendances                 | id                 | uuid                     | uuid             | NO          | 
+ attendances                 | event_uuid         | uuid                     | uuid             | NO          | 
+ attendances                 | student_id         | uuid                     | uuid             | NO          | 
+ attendances                 | group_id           | uuid                     | uuid             | NO          | 
+ attendances                 | session_id         | uuid                     | uuid             | NO          | 
+ attendances                 | device_id          | uuid                     | uuid             | NO          | 
+ attendances                 | created_by         | uuid                     | uuid             | NO          | 
+ attendances                 | schema_version     | integer                  | int4             | NO          | 1
+ attendances                 | method             | character varying        | varchar          | NO          | 'manual'::character varying
+ attendances                 | payload_hash       | character                | bpchar           | NO          | 
+ attendances                 | occurred_at_client | timestamp with time zone | timestamptz      | NO          | 
+ attendances                 | received_at_server | timestamp with time zone | timestamptz      | NO          | CURRENT_TIMESTAMP
+ attendances                 | status             | USER-DEFINED             | AttendanceStatus | NO          | 'ACTIVE'::"AttendanceStatus"
+ attendances                 | version            | integer                  | int4             | NO          | 1
+ attendances                 | enrollment_id      | uuid                     | uuid             | NO          | 
+ attendances                 | transition_txid    | bigint                   | int8             | YES         | 
+ audit_events                | institution_id     | uuid                     | uuid             | NO          | 
+ audit_events                | id                 | uuid                     | uuid             | NO          | 
+ audit_events                | actor_id           | uuid                     | uuid             | NO          | 
+ audit_events                | action             | character varying        | varchar          | NO          | 
+ audit_events                | resource_type      | character varying        | varchar          | NO          | 
+ audit_events                | resource_id        | uuid                     | uuid             | NO          | 
+ audit_events                | recorded_at        | timestamp with time zone | timestamptz      | NO          | CURRENT_TIMESTAMP
+ biometric_consents          | institution_id     | uuid                     | uuid             | NO          | 
+ biometric_consents          | id                 | uuid                     | uuid             | NO          | 
+ biometric_consents          | student_id         | uuid                     | uuid             | NO          | 
+ biometric_consents          | recorded_by        | uuid                     | uuid             | NO          | 
+ biometric_consents          | status             | USER-DEFINED             | ConsentStatus    | NO          | 'GRANTED'::"ConsentStatus"
+ biometric_consents          | notice_version     | character varying        | varchar          | NO          | 
+ biometric_consents          | evidence_ref       | uuid                     | uuid             | NO          | 
+ biometric_consents          | granted_at         | timestamp with time zone | timestamptz      | NO          | 
+ biometric_consents          | expires_at         | timestamp with time zone | timestamptz      | NO          | 
+ biometric_consents          | revoked_at         | timestamp with time zone | timestamptz      | YES         | 
+ biometric_template_metadata | institution_id     | uuid                     | uuid             | NO          | 
+ biometric_template_metadata | id                 | uuid                     | uuid             | NO          | 
+ biometric_template_metadata | student_id         | uuid                     | uuid             | NO          | 
+ biometric_template_metadata | consent_id         | uuid                     | uuid             | NO          | 
+ biometric_template_metadata | model_name         | character varying        | varchar          | NO          | 
+ biometric_template_metadata | model_version      | character varying        | varchar          | NO          | 
+ biometric_template_metadata | status             | USER-DEFINED             | TemplateStatus   | NO          | 'DISABLED'::"TemplateStatus"
+ biometric_template_metadata | created_at         | timestamp with time zone | timestamptz      | NO          | CURRENT_TIMESTAMP
+ biometric_template_metadata | revoked_at         | timestamp with time zone | timestamptz      | YES         | 
+ class_sessions              | institution_id     | uuid                     | uuid             | NO          | 
+ class_sessions              | id                 | uuid                     | uuid             | NO          | 
+ class_sessions              | group_id           | uuid                     | uuid             | NO          | 
+ class_sessions              | starts_at          | timestamp with time zone | timestamptz      | NO          | 
+ class_sessions              | ends_at            | timestamp with time zone | timestamptz      | NO          | 
+ class_sessions              | status             | USER-DEFINED             | SessionStatus    | NO          | 'PLANNED'::"SessionStatus"
+ devices                     | institution_id     | uuid                     | uuid             | NO          | 
+ devices                     | id                 | uuid                     | uuid             | NO          | 
+ devices                     | assigned_user_id   | uuid                     | uuid             | NO          | 
+ devices                     | expires_at         | timestamp with time zone | timestamptz      | NO          | 
+ devices                     | revoked_at         | timestamp with time zone | timestamptz      | YES         | 
+ enrollments                 | institution_id     | uuid                     | uuid             | NO          | 
+ enrollments                 | id                 | uuid                     | uuid             | NO          | 
+ enrollments                 | student_id         | uuid                     | uuid             | NO          | 
+ enrollments                 | group_id           | uuid                     | uuid             | NO          | 
+ enrollments                 | starts_at          | timestamp with time zone | timestamptz      | NO          | 
+ enrollments                 | ends_at            | timestamp with time zone | timestamptz      | YES         | 
+ groups                      | institution_id     | uuid                     | uuid             | NO          | 
+ groups                      | id                 | uuid                     | uuid             | NO          | 
+ groups                      | grade              | character varying        | varchar          | NO          | 
+ groups                      | section            | character varying        | varchar          | NO          | 
+ groups                      | school_year        | integer                  | int4             | NO          | 
+ institutions                | id                 | uuid                     | uuid             | NO          | 
+ institutions                | name               | character varying        | varchar          | NO          | 
+ institutions                | created_at         | timestamp with time zone | timestamptz      | NO          | CURRENT_TIMESTAMP
+ students                    | institution_id     | uuid                     | uuid             | NO          | 
+ students                    | id                 | uuid                     | uuid             | NO          | 
+ students                    | student_code       | character varying        | varchar          | NO          | 
+ students                    | full_name          | character varying        | varchar          | NO          | 
+ students                    | active             | boolean                  | bool             | NO          | true
+ teacher_assignments         | institution_id     | uuid                     | uuid             | NO          | 
+ teacher_assignments         | teacher_id         | uuid                     | uuid             | NO          | 
+ teacher_assignments         | group_id           | uuid                     | uuid             | NO          | 
+ teacher_assignments         | active             | boolean                  | bool             | NO          | true
+ teachers                    | institution_id     | uuid                     | uuid             | NO          | 
+ teachers                    | id                 | uuid                     | uuid             | NO          | 
+ teachers                    | user_id            | uuid                     | uuid             | NO          | 
+ users                       | institution_id     | uuid                     | uuid             | NO          | 
+ users                       | id                 | uuid                     | uuid             | NO          | 
+ users                       | email              | character varying        | varchar          | NO          | 
+ users                       | password_hash      | character varying        | varchar          | NO          | 
+ users                       | role               | USER-DEFINED             | UserRole         | NO          | 
+ users                       | active             | boolean                  | bool             | NO          | true
+ users                       | created_at         | timestamp with time zone | timestamptz      | NO          | CURRENT_TIMESTAMP
+(98 rows)
+
+         table_name          |                             conname                             | contype |                                                                                                                 definition                                                                                                                  
+-----------------------------+-----------------------------------------------------------------+---------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ _prisma_migrations          | _prisma_migrations_applied_steps_count_not_null                 | n       | NOT NULL applied_steps_count
+ _prisma_migrations          | _prisma_migrations_checksum_not_null                            | n       | NOT NULL checksum
+ _prisma_migrations          | _prisma_migrations_id_not_null                                  | n       | NOT NULL id
+ _prisma_migrations          | _prisma_migrations_migration_name_not_null                      | n       | NOT NULL migration_name
+ _prisma_migrations          | _prisma_migrations_pkey                                         | p       | PRIMARY KEY (id)
+ _prisma_migrations          | _prisma_migrations_started_at_not_null                          | n       | NOT NULL started_at
+ institutions                | institutions_created_at_not_null                                | n       | NOT NULL created_at
+ institutions                | institutions_id_not_null                                        | n       | NOT NULL id
+ institutions                | institutions_name_not_null                                      | n       | NOT NULL name
+ institutions                | institutions_pkey                                               | p       | PRIMARY KEY (id)
+ users                       | users_active_not_null                                           | n       | NOT NULL active
+ users                       | users_created_at_not_null                                       | n       | NOT NULL created_at
+ users                       | users_email_canonical                                           | c       | CHECK ((((email)::text = lower(btrim((email)::text))) AND (length((email)::text) > 3)))
+ users                       | users_email_not_null                                            | n       | NOT NULL email
+ users                       | users_id_not_null                                               | n       | NOT NULL id
+ users                       | users_institution_id_fkey                                       | f       | FOREIGN KEY (institution_id) REFERENCES institutions(id) ON UPDATE RESTRICT ON DELETE RESTRICT
+ users                       | users_institution_id_not_null                                   | n       | NOT NULL institution_id
+ users                       | users_password_hash_not_null                                    | n       | NOT NULL password_hash
+ users                       | users_pkey                                                      | p       | PRIMARY KEY (institution_id, id)
+ users                       | users_role_not_null                                             | n       | NOT NULL role
+ students                    | students_active_not_null                                        | n       | NOT NULL active
+ students                    | students_full_name_not_null                                     | n       | NOT NULL full_name
+ students                    | students_id_not_null                                            | n       | NOT NULL id
+ students                    | students_institution_id_fkey                                    | f       | FOREIGN KEY (institution_id) REFERENCES institutions(id) ON UPDATE RESTRICT ON DELETE RESTRICT
+ students                    | students_institution_id_not_null                                | n       | NOT NULL institution_id
+ students                    | students_pkey                                                   | p       | PRIMARY KEY (institution_id, id)
+ students                    | students_student_code_not_null                                  | n       | NOT NULL student_code
+ teachers                    | teachers_id_not_null                                            | n       | NOT NULL id
+ teachers                    | teachers_institution_id_not_null                                | n       | NOT NULL institution_id
+ teachers                    | teachers_institution_id_user_id_fkey                            | f       | FOREIGN KEY (institution_id, user_id) REFERENCES users(institution_id, id) ON UPDATE RESTRICT ON DELETE RESTRICT
+ teachers                    | teachers_pkey                                                   | p       | PRIMARY KEY (institution_id, id)
+ teachers                    | teachers_user_id_not_null                                       | n       | NOT NULL user_id
+ groups                      | groups_grade_not_null                                           | n       | NOT NULL grade
+ groups                      | groups_id_not_null                                              | n       | NOT NULL id
+ groups                      | groups_institution_id_fkey                                      | f       | FOREIGN KEY (institution_id) REFERENCES institutions(id) ON UPDATE RESTRICT ON DELETE RESTRICT
+ groups                      | groups_institution_id_not_null                                  | n       | NOT NULL institution_id
+ groups                      | groups_pkey                                                     | p       | PRIMARY KEY (institution_id, id)
+ groups                      | groups_school_year_not_null                                     | n       | NOT NULL school_year
+ groups                      | groups_section_not_null                                         | n       | NOT NULL section
+ groups                      | groups_year_range                                               | c       | CHECK (((school_year >= 2000) AND (school_year <= 2200)))
+ enrollments                 | enrollments_finite_period                                       | c       | CHECK ((isfinite(starts_at) AND ((ends_at IS NULL) OR isfinite(ends_at))))
+ enrollments                 | enrollments_group_id_not_null                                   | n       | NOT NULL group_id
+ enrollments                 | enrollments_id_not_null                                         | n       | NOT NULL id
+ enrollments                 | enrollments_institution_id_group_id_fkey                        | f       | FOREIGN KEY (institution_id, group_id) REFERENCES groups(institution_id, id) ON UPDATE RESTRICT ON DELETE RESTRICT
+ enrollments                 | enrollments_institution_id_not_null                             | n       | NOT NULL institution_id
+ enrollments                 | enrollments_institution_id_student_id_fkey                      | f       | FOREIGN KEY (institution_id, student_id) REFERENCES students(institution_id, id) ON UPDATE RESTRICT ON DELETE RESTRICT
+ enrollments                 | enrollments_pkey                                                | p       | PRIMARY KEY (institution_id, id)
+ enrollments                 | enrollments_starts_at_not_null                                  | n       | NOT NULL starts_at
+ enrollments                 | enrollments_student_id_not_null                                 | n       | NOT NULL student_id
+ enrollments                 | enrollments_valid_period                                        | c       | CHECK (((ends_at IS NULL) OR (ends_at > starts_at)))
+ teacher_assignments         | teacher_assignments_active_not_null                             | n       | NOT NULL active
+ teacher_assignments         | teacher_assignments_group_id_not_null                           | n       | NOT NULL group_id
+ teacher_assignments         | teacher_assignments_institution_id_group_id_fkey                | f       | FOREIGN KEY (institution_id, group_id) REFERENCES groups(institution_id, id) ON UPDATE RESTRICT ON DELETE RESTRICT
+ teacher_assignments         | teacher_assignments_institution_id_not_null                     | n       | NOT NULL institution_id
+ teacher_assignments         | teacher_assignments_institution_id_teacher_id_fkey              | f       | FOREIGN KEY (institution_id, teacher_id) REFERENCES teachers(institution_id, id) ON UPDATE RESTRICT ON DELETE RESTRICT
+ teacher_assignments         | teacher_assignments_pkey                                        | p       | PRIMARY KEY (institution_id, teacher_id, group_id)
+ teacher_assignments         | teacher_assignments_teacher_id_not_null                         | n       | NOT NULL teacher_id
+ class_sessions              | class_sessions_ends_at_not_null                                 | n       | NOT NULL ends_at
+ class_sessions              | class_sessions_group_id_not_null                                | n       | NOT NULL group_id
+ class_sessions              | class_sessions_id_not_null                                      | n       | NOT NULL id
+ class_sessions              | class_sessions_institution_id_group_id_fkey                     | f       | FOREIGN KEY (institution_id, group_id) REFERENCES groups(institution_id, id) ON UPDATE RESTRICT ON DELETE RESTRICT
+ class_sessions              | class_sessions_institution_id_not_null                          | n       | NOT NULL institution_id
+ class_sessions              | class_sessions_pkey                                             | p       | PRIMARY KEY (institution_id, id)
+ class_sessions              | class_sessions_starts_at_not_null                               | n       | NOT NULL starts_at
+ class_sessions              | class_sessions_status_not_null                                  | n       | NOT NULL status
+ class_sessions              | sessions_valid_period                                           | c       | CHECK ((ends_at > starts_at))
+ devices                     | devices_assigned_user_id_not_null                               | n       | NOT NULL assigned_user_id
+ devices                     | devices_expires_at_not_null                                     | n       | NOT NULL expires_at
+ devices                     | devices_id_not_null                                             | n       | NOT NULL id
+ devices                     | devices_institution_id_assigned_user_id_fkey                    | f       | FOREIGN KEY (institution_id, assigned_user_id) REFERENCES users(institution_id, id) ON UPDATE RESTRICT ON DELETE RESTRICT
+ devices                     | devices_institution_id_not_null                                 | n       | NOT NULL institution_id
+ devices                     | devices_pkey                                                    | p       | PRIMARY KEY (institution_id, id)
+ biometric_consents          | biometric_consents_evidence_ref_not_null                        | n       | NOT NULL evidence_ref
+ biometric_consents          | biometric_consents_expires_at_not_null                          | n       | NOT NULL expires_at
+ biometric_consents          | biometric_consents_granted_at_not_null                          | n       | NOT NULL granted_at
+ biometric_consents          | biometric_consents_id_not_null                                  | n       | NOT NULL id
+ biometric_consents          | biometric_consents_institution_id_not_null                      | n       | NOT NULL institution_id
+ biometric_consents          | biometric_consents_institution_id_recorded_by_fkey              | f       | FOREIGN KEY (institution_id, recorded_by) REFERENCES users(institution_id, id) ON UPDATE RESTRICT ON DELETE RESTRICT
+ biometric_consents          | biometric_consents_institution_id_student_id_fkey               | f       | FOREIGN KEY (institution_id, student_id) REFERENCES students(institution_id, id) ON UPDATE RESTRICT ON DELETE RESTRICT
+ biometric_consents          | biometric_consents_notice_version_not_null                      | n       | NOT NULL notice_version
+ biometric_consents          | biometric_consents_pkey                                         | p       | PRIMARY KEY (institution_id, id)
+ biometric_consents          | biometric_consents_recorded_by_not_null                         | n       | NOT NULL recorded_by
+ biometric_consents          | biometric_consents_status_not_null                              | n       | NOT NULL status
+ biometric_consents          | biometric_consents_student_id_not_null                          | n       | NOT NULL student_id
+ biometric_consents          | consents_valid_period                                           | c       | CHECK (((expires_at > granted_at) AND ((revoked_at IS NULL) OR (revoked_at >= granted_at)) AND (((status = 'GRANTED'::"ConsentStatus") AND (revoked_at IS NULL)) OR ((status = 'REVOKED'::"ConsentStatus") AND (revoked_at IS NOT NULL)))))
+ biometric_template_metadata | biometric_template_metadata_consent_id_not_null                 | n       | NOT NULL consent_id
+ biometric_template_metadata | biometric_template_metadata_created_at_not_null                 | n       | NOT NULL created_at
+ biometric_template_metadata | biometric_template_metadata_id_not_null                         | n       | NOT NULL id
+ biometric_template_metadata | biometric_template_metadata_institution_id_consent_id_stud_fkey | f       | FOREIGN KEY (institution_id, consent_id, student_id) REFERENCES biometric_consents(institution_id, id, student_id) ON UPDATE RESTRICT ON DELETE RESTRICT
+ biometric_template_metadata | biometric_template_metadata_institution_id_not_null             | n       | NOT NULL institution_id
+ biometric_template_metadata | biometric_template_metadata_model_name_not_null                 | n       | NOT NULL model_name
+ biometric_template_metadata | biometric_template_metadata_model_version_not_null              | n       | NOT NULL model_version
+ biometric_template_metadata | biometric_template_metadata_pkey                                | p       | PRIMARY KEY (institution_id, id)
+ biometric_template_metadata | biometric_template_metadata_status_not_null                     | n       | NOT NULL status
+ biometric_template_metadata | biometric_template_metadata_student_id_not_null                 | n       | NOT NULL student_id
+ biometric_template_metadata | templates_revocation                                            | c       | CHECK ((((status = 'DISABLED'::"TemplateStatus") AND (revoked_at IS NULL)) OR ((status = 'REVOKED'::"TemplateStatus") AND (revoked_at IS NOT NULL))))
+ attendances                 | attendance_correction_required                                  | t       | TRIGGER DEFERRABLE INITIALLY DEFERRED
+ attendances                 | attendances_created_by_not_null                                 | n       | NOT NULL created_by
+ attendances                 | attendances_device_id_not_null                                  | n       | NOT NULL device_id
+ attendances                 | attendances_enrollment_id_not_null                              | n       | NOT NULL enrollment_id
+ attendances                 | attendances_episode_fkey                                        | f       | FOREIGN KEY (institution_id, enrollment_id, student_id, group_id) REFERENCES enrollments(institution_id, id, student_id, group_id) ON UPDATE RESTRICT ON DELETE RESTRICT
+ attendances                 | attendances_event_uuid_not_null                                 | n       | NOT NULL event_uuid
+ attendances                 | attendances_group_id_not_null                                   | n       | NOT NULL group_id
+ attendances                 | attendances_hash                                                | c       | CHECK ((payload_hash ~ '^[0-9a-f]{64}$'::text))
+ attendances                 | attendances_id_not_null                                         | n       | NOT NULL id
+ attendances                 | attendances_institution_id_created_by_fkey                      | f       | FOREIGN KEY (institution_id, created_by) REFERENCES users(institution_id, id) ON UPDATE RESTRICT ON DELETE RESTRICT
+ attendances                 | attendances_institution_id_device_id_fkey                       | f       | FOREIGN KEY (institution_id, device_id) REFERENCES devices(institution_id, id) ON UPDATE RESTRICT ON DELETE RESTRICT
+ attendances                 | attendances_institution_id_not_null                             | n       | NOT NULL institution_id
+ attendances                 | attendances_institution_id_session_id_group_id_fkey             | f       | FOREIGN KEY (institution_id, session_id, group_id) REFERENCES class_sessions(institution_id, id, group_id) ON UPDATE RESTRICT ON DELETE RESTRICT
+ attendances                 | attendances_manual_v1                                           | c       | CHECK ((((method)::text = 'manual'::text) AND (schema_version = 1)))
+ attendances                 | attendances_method_not_null                                     | n       | NOT NULL method
+ attendances                 | attendances_occurred_at_client_not_null                         | n       | NOT NULL occurred_at_client
+ attendances                 | attendances_payload_hash_not_null                               | n       | NOT NULL payload_hash
+ attendances                 | attendances_pkey                                                | p       | PRIMARY KEY (institution_id, id)
+ attendances                 | attendances_received_at_server_not_null                         | n       | NOT NULL received_at_server
+ attendances                 | attendances_schema_version_not_null                             | n       | NOT NULL schema_version
+ attendances                 | attendances_session_id_not_null                                 | n       | NOT NULL session_id
+ attendances                 | attendances_status_not_null                                     | n       | NOT NULL status
+ attendances                 | attendances_student_id_not_null                                 | n       | NOT NULL student_id
+ attendances                 | attendances_version                                             | c       | CHECK ((version >= 1))
+ attendances                 | attendances_version_not_null                                    | n       | NOT NULL version
+ attendance_corrections      | attendance_corrections_actor_id_not_null                        | n       | NOT NULL actor_id
+ attendance_corrections      | attendance_corrections_attendance_id_not_null                   | n       | NOT NULL attendance_id
+ attendance_corrections      | attendance_corrections_from_status_not_null                     | n       | NOT NULL from_status
+ attendance_corrections      | attendance_corrections_from_version_not_null                    | n       | NOT NULL from_version
+ attendance_corrections      | attendance_corrections_id_not_null                              | n       | NOT NULL id
+ attendance_corrections      | attendance_corrections_institution_id_actor_id_fkey             | f       | FOREIGN KEY (institution_id, actor_id) REFERENCES users(institution_id, id) ON UPDATE RESTRICT ON DELETE RESTRICT
+ attendance_corrections      | attendance_corrections_institution_id_attendance_id_fkey        | f       | FOREIGN KEY (institution_id, attendance_id) REFERENCES attendances(institution_id, id) ON UPDATE RESTRICT ON DELETE RESTRICT
+ attendance_corrections      | attendance_corrections_institution_id_not_null                  | n       | NOT NULL institution_id
+ attendance_corrections      | attendance_corrections_pkey                                     | p       | PRIMARY KEY (institution_id, id)
+ attendance_corrections      | attendance_corrections_reason_not_null                          | n       | NOT NULL reason
+ attendance_corrections      | attendance_corrections_recorded_at_not_null                     | n       | NOT NULL recorded_at
+ attendance_corrections      | attendance_corrections_to_status_not_null                       | n       | NOT NULL to_status
+ attendance_corrections      | attendance_corrections_to_version_not_null                      | n       | NOT NULL to_version
+ attendance_corrections      | attendance_corrections_transition_txid_not_null                 | n       | NOT NULL transition_txid
+ attendance_corrections      | correction_requires_transition                                  | t       | TRIGGER DEFERRABLE INITIALLY DEFERRED
+ attendance_corrections      | corrections_transition                                          | c       | CHECK (((from_version >= 1) AND (to_version = (from_version + 1)) AND (from_status <> to_status)))
+ audit_events                | audit_correction_pair                                           | c       | CHECK ((((action)::text = 'attendance.corrected'::text) = ((resource_type)::text = 'attendance_correction'::text)))
+ audit_events                | audit_events_action_not_null                                    | n       | NOT NULL action
+ audit_events                | audit_events_actor_id_not_null                                  | n       | NOT NULL actor_id
+ audit_events                | audit_events_id_not_null                                        | n       | NOT NULL id
+ audit_events                | audit_events_institution_id_actor_id_fkey                       | f       | FOREIGN KEY (institution_id, actor_id) REFERENCES users(institution_id, id) ON UPDATE RESTRICT ON DELETE RESTRICT
+ audit_events                | audit_events_institution_id_not_null                            | n       | NOT NULL institution_id
+ audit_events                | audit_events_pkey                                               | p       | PRIMARY KEY (institution_id, id)
+ audit_events                | audit_events_recorded_at_not_null                               | n       | NOT NULL recorded_at
+ audit_events                | audit_events_resource_id_not_null                               | n       | NOT NULL resource_id
+ audit_events                | audit_events_resource_type_not_null                             | n       | NOT NULL resource_type
+ audit_events                | audit_requires_correction                                       | t       | TRIGGER DEFERRABLE INITIALLY DEFERRED
+(148 rows)
+
+          tablename          |                            indexname                            |                                                                                                             indexdef                                                                                                              
+-----------------------------+-----------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ _prisma_migrations          | _prisma_migrations_pkey                                         | CREATE UNIQUE INDEX _prisma_migrations_pkey ON public._prisma_migrations USING btree (id)
+ attendance_corrections      | attendance_corrections_institution_id_actor_id_idx              | CREATE INDEX attendance_corrections_institution_id_actor_id_idx ON public.attendance_corrections USING btree (institution_id, actor_id)
+ attendance_corrections      | attendance_corrections_institution_id_attendance_id_to_vers_key | CREATE UNIQUE INDEX attendance_corrections_institution_id_attendance_id_to_vers_key ON public.attendance_corrections USING btree (institution_id, attendance_id, to_version)
+ attendance_corrections      | attendance_corrections_pkey                                     | CREATE UNIQUE INDEX attendance_corrections_pkey ON public.attendance_corrections USING btree (institution_id, id)
+ attendances                 | attendances_institution_id_created_by_idx                       | CREATE INDEX attendances_institution_id_created_by_idx ON public.attendances USING btree (institution_id, created_by)
+ attendances                 | attendances_institution_id_device_id_idx                        | CREATE INDEX attendances_institution_id_device_id_idx ON public.attendances USING btree (institution_id, device_id)
+ attendances                 | attendances_institution_id_enrollment_id_student_id_group_id_id | CREATE INDEX attendances_institution_id_enrollment_id_student_id_group_id_id ON public.attendances USING btree (institution_id, enrollment_id, student_id, group_id)
+ attendances                 | attendances_institution_id_event_uuid_key                       | CREATE UNIQUE INDEX attendances_institution_id_event_uuid_key ON public.attendances USING btree (institution_id, event_uuid)
+ attendances                 | attendances_institution_id_session_id_group_id_idx              | CREATE INDEX attendances_institution_id_session_id_group_id_idx ON public.attendances USING btree (institution_id, session_id, group_id)
+ attendances                 | attendances_institution_id_student_id_group_id_idx              | CREATE INDEX attendances_institution_id_student_id_group_id_idx ON public.attendances USING btree (institution_id, student_id, group_id)
+ attendances                 | attendances_one_active_per_session                              | CREATE UNIQUE INDEX attendances_one_active_per_session ON public.attendances USING btree (institution_id, student_id, session_id) WHERE (status = 'ACTIVE'::"AttendanceStatus")
+ attendances                 | attendances_pkey                                                | CREATE UNIQUE INDEX attendances_pkey ON public.attendances USING btree (institution_id, id)
+ audit_events                | audit_events_institution_id_actor_id_idx                        | CREATE INDEX audit_events_institution_id_actor_id_idx ON public.audit_events USING btree (institution_id, actor_id)
+ audit_events                | audit_events_institution_id_resource_type_resource_id_recor_idx | CREATE INDEX audit_events_institution_id_resource_type_resource_id_recor_idx ON public.audit_events USING btree (institution_id, resource_type, resource_id, recorded_at)
+ audit_events                | audit_events_pkey                                               | CREATE UNIQUE INDEX audit_events_pkey ON public.audit_events USING btree (institution_id, id)
+ audit_events                | audit_one_per_correction                                        | CREATE UNIQUE INDEX audit_one_per_correction ON public.audit_events USING btree (institution_id, resource_id) WHERE (((action)::text = 'attendance.corrected'::text) AND ((resource_type)::text = 'attendance_correction'::text))
+ biometric_consents          | biometric_consents_institution_id_id_student_id_key             | CREATE UNIQUE INDEX biometric_consents_institution_id_id_student_id_key ON public.biometric_consents USING btree (institution_id, id, student_id)
+ biometric_consents          | biometric_consents_institution_id_recorded_by_idx               | CREATE INDEX biometric_consents_institution_id_recorded_by_idx ON public.biometric_consents USING btree (institution_id, recorded_by)
+ biometric_consents          | biometric_consents_institution_id_student_id_status_idx         | CREATE INDEX biometric_consents_institution_id_student_id_status_idx ON public.biometric_consents USING btree (institution_id, student_id, status)
+ biometric_consents          | biometric_consents_pkey                                         | CREATE UNIQUE INDEX biometric_consents_pkey ON public.biometric_consents USING btree (institution_id, id)
+ biometric_template_metadata | biometric_template_metadata_institution_id_consent_id_stude_idx | CREATE INDEX biometric_template_metadata_institution_id_consent_id_stude_idx ON public.biometric_template_metadata USING btree (institution_id, consent_id, student_id)
+ biometric_template_metadata | biometric_template_metadata_pkey                                | CREATE UNIQUE INDEX biometric_template_metadata_pkey ON public.biometric_template_metadata USING btree (institution_id, id)
+ class_sessions              | class_sessions_institution_id_group_id_starts_at_idx            | CREATE INDEX class_sessions_institution_id_group_id_starts_at_idx ON public.class_sessions USING btree (institution_id, group_id, starts_at)
+ class_sessions              | class_sessions_institution_id_id_group_id_key                   | CREATE UNIQUE INDEX class_sessions_institution_id_id_group_id_key ON public.class_sessions USING btree (institution_id, id, group_id)
+ class_sessions              | class_sessions_pkey                                             | CREATE UNIQUE INDEX class_sessions_pkey ON public.class_sessions USING btree (institution_id, id)
+ devices                     | devices_institution_id_assigned_user_id_idx                     | CREATE INDEX devices_institution_id_assigned_user_id_idx ON public.devices USING btree (institution_id, assigned_user_id)
+ devices                     | devices_pkey                                                    | CREATE UNIQUE INDEX devices_pkey ON public.devices USING btree (institution_id, id)
+ enrollments                 | enrollments_institution_id_group_id_idx                         | CREATE INDEX enrollments_institution_id_group_id_idx ON public.enrollments USING btree (institution_id, group_id)
+ enrollments                 | enrollments_institution_id_id_student_id_group_id_key           | CREATE UNIQUE INDEX enrollments_institution_id_id_student_id_group_id_key ON public.enrollments USING btree (institution_id, id, student_id, group_id)
+ enrollments                 | enrollments_institution_id_student_id_group_id_starts_at_idx    | CREATE INDEX enrollments_institution_id_student_id_group_id_starts_at_idx ON public.enrollments USING btree (institution_id, student_id, group_id, starts_at)
+ enrollments                 | enrollments_pkey                                                | CREATE UNIQUE INDEX enrollments_pkey ON public.enrollments USING btree (institution_id, id)
+ groups                      | groups_institution_id_school_year_grade_section_key             | CREATE UNIQUE INDEX groups_institution_id_school_year_grade_section_key ON public.groups USING btree (institution_id, school_year, grade, section)
+ groups                      | groups_pkey                                                     | CREATE UNIQUE INDEX groups_pkey ON public.groups USING btree (institution_id, id)
+ institutions                | institutions_pkey                                               | CREATE UNIQUE INDEX institutions_pkey ON public.institutions USING btree (id)
+ students                    | students_institution_id_student_code_key                        | CREATE UNIQUE INDEX students_institution_id_student_code_key ON public.students USING btree (institution_id, student_code)
+ students                    | students_pkey                                                   | CREATE UNIQUE INDEX students_pkey ON public.students USING btree (institution_id, id)
+ teacher_assignments         | teacher_assignments_institution_id_group_id_idx                 | CREATE INDEX teacher_assignments_institution_id_group_id_idx ON public.teacher_assignments USING btree (institution_id, group_id)
+ teacher_assignments         | teacher_assignments_pkey                                        | CREATE UNIQUE INDEX teacher_assignments_pkey ON public.teacher_assignments USING btree (institution_id, teacher_id, group_id)
+ teachers                    | teachers_institution_id_user_id_key                             | CREATE UNIQUE INDEX teachers_institution_id_user_id_key ON public.teachers USING btree (institution_id, user_id)
+ teachers                    | teachers_pkey                                                   | CREATE UNIQUE INDEX teachers_pkey ON public.teachers USING btree (institution_id, id)
+ users                       | users_institution_id_email_key                                  | CREATE UNIQUE INDEX users_institution_id_email_key ON public.users USING btree (institution_id, email)
+ users                       | users_pkey                                                      | CREATE UNIQUE INDEX users_pkey ON public.users USING btree (institution_id, id)
+(42 rows)
+
+        relname         |             tgname             | tgenabled |                                                                                             definition                                                                                             
+------------------------+--------------------------------+-----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ attendance_corrections | correction_append_only         | O         | CREATE TRIGGER correction_append_only BEFORE DELETE OR UPDATE ON public.attendance_corrections FOR EACH ROW EXECUTE FUNCTION forbid_history_mutation()
+ attendance_corrections | correction_requires_transition | O         | CREATE CONSTRAINT TRIGGER correction_requires_transition AFTER INSERT ON public.attendance_corrections DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXECUTE FUNCTION require_correction_transition()
+ attendance_corrections | correction_transaction         | O         | CREATE TRIGGER correction_transaction BEFORE INSERT ON public.attendance_corrections FOR EACH ROW EXECUTE FUNCTION stamp_correction_transaction()
+ attendances            | attendance_correction_required | O         | CREATE CONSTRAINT TRIGGER attendance_correction_required AFTER UPDATE ON public.attendances DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXECUTE FUNCTION require_attendance_correction()
+ attendances            | attendance_episode_guard       | O         | CREATE TRIGGER attendance_episode_guard BEFORE INSERT ON public.attendances FOR EACH ROW EXECUTE FUNCTION guard_attendance_episode()
+ attendances            | attendance_guard               | O         | CREATE TRIGGER attendance_guard BEFORE INSERT OR DELETE OR UPDATE ON public.attendances FOR EACH ROW EXECUTE FUNCTION guard_attendance()
+ audit_events           | audit_append_only              | O         | CREATE TRIGGER audit_append_only BEFORE DELETE OR UPDATE ON public.audit_events FOR EACH ROW EXECUTE FUNCTION forbid_history_mutation()
+ audit_events           | audit_requires_correction      | O         | CREATE CONSTRAINT TRIGGER audit_requires_correction AFTER INSERT ON public.audit_events DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXECUTE FUNCTION require_audit_correction()
+ enrollments            | enrollment_period_guard        | O         | CREATE TRIGGER enrollment_period_guard BEFORE INSERT OR UPDATE ON public.enrollments FOR EACH ROW EXECUTE FUNCTION guard_enrollment_period()
+(9 rows)
+
+            proname            | prosecdef |                                               definition                                                
+-------------------------------+-----------+---------------------------------------------------------------------------------------------------------
+ forbid_history_mutation       | f         | CREATE OR REPLACE FUNCTION public.forbid_history_mutation()                                            +
+                               |           |  RETURNS trigger                                                                                       +
+                               |           |  LANGUAGE plpgsql                                                                                      +
+                               |           | AS $function$                                                                                          +
+                               |           | BEGIN                                                                                                  +
+                               |           |   RAISE EXCEPTION 'append_only_history';                                                               +
+                               |           | END;                                                                                                   +
+                               |           | $function$                                                                                             +
+                               |           | 
+ guard_attendance              | f         | CREATE OR REPLACE FUNCTION public.guard_attendance()                                                   +
+                               |           |  RETURNS trigger                                                                                       +
+                               |           |  LANGUAGE plpgsql                                                                                      +
+                               |           | AS $function$                                                                                          +
+                               |           | BEGIN                                                                                                  +
+                               |           |  IF TG_OP='DELETE' THEN RAISE EXCEPTION 'attendance_delete_forbidden'; END IF;                         +
+                               |           |  IF TG_OP='INSERT' THEN                                                                                +
+                               |           |    IF NEW.version<>1 OR NEW.status<>'ACTIVE' OR NEW.transition_txid IS NOT NULL THEN                   +
+                               |           |      RAISE EXCEPTION 'attendance_initial_state';                                                       +
+                               |           |    END IF;                                                                                             +
+                               |           |    RETURN NEW;                                                                                         +
+                               |           |  END IF;                                                                                               +
+                               |           |  IF (to_jsonb(NEW)-'status'-'version') IS DISTINCT FROM (to_jsonb(OLD)-'status'-'version')             +
+                               |           |    OR NEW.version<>OLD.version+1 OR NEW.status=OLD.status THEN                                         +
+                               |           |    RAISE EXCEPTION 'attendance_immutable_or_invalid_transition';                                       +
+                               |           |  END IF;                                                                                               +
+                               |           |  IF OLD.transition_txid = pg_current_xact_id()::text::bigint THEN                                      +
+                               |           |    RAISE EXCEPTION 'one_attendance_transition_per_transaction';                                        +
+                               |           |  END IF;                                                                                               +
+                               |           |  NEW.transition_txid := pg_current_xact_id()::text::bigint;                                            +
+                               |           |  RETURN NEW;                                                                                           +
+                               |           | END;                                                                                                   +
+                               |           | $function$                                                                                             +
+                               |           | 
+ guard_attendance_episode      | f         | CREATE OR REPLACE FUNCTION public.guard_attendance_episode()                                           +
+                               |           |  RETURNS trigger                                                                                       +
+                               |           |  LANGUAGE plpgsql                                                                                      +
+                               |           | AS $function$                                                                                          +
+                               |           | DECLARE episode enrollments%ROWTYPE;                                                                   +
+                               |           | BEGIN                                                                                                  +
+                               |           |  SELECT * INTO episode FROM enrollments WHERE institution_id=NEW.institution_id                        +
+                               |           |    AND id=NEW.enrollment_id AND student_id=NEW.student_id AND group_id=NEW.group_id FOR SHARE;         +
+                               |           |  IF NOT FOUND THEN RAISE EXCEPTION 'attendance_episode_missing' USING ERRCODE='23503'; END IF;         +
+                               |           |  IF NOT (NEW.occurred_at_client <@ tstzrange(episode.starts_at,episode.ends_at,'[)')) THEN             +
+                               |           |    RAISE EXCEPTION 'attendance_outside_episode' USING ERRCODE='23514';                                 +
+                               |           |  END IF;                                                                                               +
+                               |           |  RETURN NEW;                                                                                           +
+                               |           | END;                                                                                                   +
+                               |           | $function$                                                                                             +
+                               |           | 
+ guard_enrollment_period       | f         | CREATE OR REPLACE FUNCTION public.guard_enrollment_period()                                            +
+                               |           |  RETURNS trigger                                                                                       +
+                               |           |  LANGUAGE plpgsql                                                                                      +
+                               |           | AS $function$                                                                                          +
+                               |           | BEGIN                                                                                                  +
+                               |           |  IF TG_OP='UPDATE' AND (NEW.institution_id,NEW.id,NEW.student_id,NEW.group_id)                         +
+                               |           |     IS DISTINCT FROM (OLD.institution_id,OLD.id,OLD.student_id,OLD.group_id) THEN                      +
+                               |           |    RAISE EXCEPTION 'enrollment_identity_immutable';                                                    +
+                               |           |  END IF;                                                                                               +
+                               |           |  -- Serializa por estudiante. UPDATE real sin cambio de valor también detecta                          +
+                               |           |  -- snapshots obsoletos en REPEATABLE READ/SERIALIZABLE (40001, reintentar).                           +
+                               |           |  UPDATE students SET active=active WHERE institution_id=NEW.institution_id AND id=NEW.student_id;      +
+                               |           |  IF NOT FOUND THEN RAISE EXCEPTION 'enrollment_student_missing' USING ERRCODE='23503'; END IF;         +
+                               |           |  IF NEW.ends_at IS NOT NULL AND NEW.ends_at<=NEW.starts_at THEN                                        +
+                               |           |    RAISE EXCEPTION 'enrollment_invalid_period' USING ERRCODE='23514';                                  +
+                               |           |  END IF;                                                                                               +
+                               |           |  IF EXISTS(SELECT 1 FROM enrollments e WHERE e.institution_id=NEW.institution_id                       +
+                               |           |   AND e.student_id=NEW.student_id AND e.group_id=NEW.group_id AND e.id<>NEW.id                         +
+                               |           |   AND tstzrange(e.starts_at,e.ends_at,'[)') && tstzrange(NEW.starts_at,NEW.ends_at,'[)')) THEN         +
+                               |           |    RAISE EXCEPTION 'enrollment_period_overlap' USING ERRCODE='23P01';                                  +
+                               |           |  END IF;                                                                                               +
+                               |           |  IF TG_OP='UPDATE' AND EXISTS(SELECT 1 FROM attendances a                                              +
+                               |           |   WHERE a.institution_id=NEW.institution_id AND a.enrollment_id=NEW.id                                 +
+                               |           |    AND NOT (a.occurred_at_client <@ tstzrange(NEW.starts_at,NEW.ends_at,'[)'))) THEN                   +
+                               |           |    RAISE EXCEPTION 'enrollment_period_would_orphan_history' USING ERRCODE='23514';                     +
+                               |           |  END IF;                                                                                               +
+                               |           |  RETURN NEW;                                                                                           +
+                               |           | END;                                                                                                   +
+                               |           | $function$                                                                                             +
+                               |           | 
+ require_attendance_correction | f         | CREATE OR REPLACE FUNCTION public.require_attendance_correction()                                      +
+                               |           |  RETURNS trigger                                                                                       +
+                               |           |  LANGUAGE plpgsql                                                                                      +
+                               |           | AS $function$                                                                                          +
+                               |           | BEGIN                                                                                                  +
+                               |           |  IF NOT EXISTS (                                                                                       +
+                               |           |    SELECT 1 FROM attendance_corrections c JOIN audit_events a                                          +
+                               |           |     ON a.institution_id=c.institution_id AND a.resource_id=c.id AND a.actor_id=c.actor_id              +
+                               |           |     AND a.action='attendance.corrected' AND a.resource_type='attendance_correction'                    +
+                               |           |    WHERE c.institution_id=NEW.institution_id AND c.attendance_id=NEW.id                                +
+                               |           |     AND c.from_version=OLD.version AND c.to_version=NEW.version                                        +
+                               |           |     AND c.from_status=OLD.status AND c.to_status=NEW.status                                            +
+                               |           |     AND c.transition_txid=NEW.transition_txid AND c.transition_txid=pg_current_xact_id()::text::bigint +
+                               |           |  ) THEN RAISE EXCEPTION 'attendance_correction_audit_required'; END IF;                                +
+                               |           |  RETURN NULL;                                                                                          +
+                               |           | END;                                                                                                   +
+                               |           | $function$                                                                                             +
+                               |           | 
+ require_audit_correction      | f         | CREATE OR REPLACE FUNCTION public.require_audit_correction()                                           +
+                               |           |  RETURNS trigger                                                                                       +
+                               |           |  LANGUAGE plpgsql                                                                                      +
+                               |           | AS $function$                                                                                          +
+                               |           | BEGIN                                                                                                  +
+                               |           |  IF NEW.action='attendance.corrected' AND NOT EXISTS (                                                 +
+                               |           |   SELECT 1 FROM attendance_corrections c JOIN attendances a                                            +
+                               |           |    ON a.institution_id=c.institution_id AND a.id=c.attendance_id                                       +
+                               |           |   WHERE c.institution_id=NEW.institution_id AND c.id=NEW.resource_id AND c.actor_id=NEW.actor_id       +
+                               |           |    AND c.to_version=a.version AND c.to_status=a.status                                                 +
+                               |           |    AND c.transition_txid=a.transition_txid AND c.transition_txid=pg_current_xact_id()::text::bigint    +
+                               |           |  ) THEN RAISE EXCEPTION 'audit_real_correction_required'; END IF;                                      +
+                               |           |  RETURN NULL;                                                                                          +
+                               |           | END;                                                                                                   +
+                               |           | $function$                                                                                             +
+                               |           | 
+ require_correction_transition | f         | CREATE OR REPLACE FUNCTION public.require_correction_transition()                                      +
+                               |           |  RETURNS trigger                                                                                       +
+                               |           |  LANGUAGE plpgsql                                                                                      +
+                               |           | AS $function$                                                                                          +
+                               |           | BEGIN                                                                                                  +
+                               |           |  IF NOT EXISTS (                                                                                       +
+                               |           |   SELECT 1 FROM attendances a JOIN audit_events e                                                      +
+                               |           |    ON e.institution_id=NEW.institution_id AND e.resource_id=NEW.id AND e.actor_id=NEW.actor_id         +
+                               |           |    AND e.action='attendance.corrected' AND e.resource_type='attendance_correction'                     +
+                               |           |   WHERE a.institution_id=NEW.institution_id AND a.id=NEW.attendance_id                                 +
+                               |           |    AND a.version=NEW.to_version AND a.status=NEW.to_status                                             +
+                               |           |    AND a.transition_txid=NEW.transition_txid AND NEW.transition_txid=pg_current_xact_id()::text::bigint+
+                               |           |  ) THEN RAISE EXCEPTION 'correction_real_transition_and_audit_required'; END IF;                       +
+                               |           |  RETURN NULL;                                                                                          +
+                               |           | END;                                                                                                   +
+                               |           | $function$                                                                                             +
+                               |           | 
+ stamp_correction_transaction  | f         | CREATE OR REPLACE FUNCTION public.stamp_correction_transaction()                                       +
+                               |           |  RETURNS trigger                                                                                       +
+                               |           |  LANGUAGE plpgsql                                                                                      +
+                               |           | AS $function$                                                                                          +
+                               |           | BEGIN                                                                                                  +
+                               |           |  NEW.transition_txid := pg_current_xact_id()::text::bigint;                                            +
+                               |           |  RETURN NEW;                                                                                           +
+                               |           | END;                                                                                                   +
+                               |           | $function$                                                                                             +
+                               |           | 
+(8 rows)
+
+          tablename          |    policyname     | permissive |  roles   | cmd |                                              qual                                              |                                           with_check                                           
+-----------------------------+-------------------+------------+----------+-----+------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------
+ attendance_corrections      | tenant_scope      | PERMISSIVE | {public} | ALL | (institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid) | (institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid)
+ attendances                 | tenant_scope      | PERMISSIVE | {public} | ALL | (institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid) | (institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid)
+ audit_events                | tenant_scope      | PERMISSIVE | {public} | ALL | (institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid) | (institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid)
+ biometric_consents          | tenant_scope      | PERMISSIVE | {public} | ALL | (institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid) | (institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid)
+ biometric_template_metadata | tenant_scope      | PERMISSIVE | {public} | ALL | (institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid) | (institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid)
+ class_sessions              | tenant_scope      | PERMISSIVE | {public} | ALL | (institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid) | (institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid)
+ devices                     | tenant_scope      | PERMISSIVE | {public} | ALL | (institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid) | (institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid)
+ enrollments                 | tenant_scope      | PERMISSIVE | {public} | ALL | (institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid) | (institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid)
+ groups                      | tenant_scope      | PERMISSIVE | {public} | ALL | (institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid) | (institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid)
+ institutions                | institution_scope | PERMISSIVE | {public} | ALL | (id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid)             | (id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid)
+ students                    | tenant_scope      | PERMISSIVE | {public} | ALL | (institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid) | (institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid)
+ teacher_assignments         | tenant_scope      | PERMISSIVE | {public} | ALL | (institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid) | (institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid)
+ teachers                    | tenant_scope      | PERMISSIVE | {public} | ALL | (institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid) | (institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid)
+ users                       | tenant_scope      | PERMISSIVE | {public} | ALL | (institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid) | (institution_id = (NULLIF(current_setting('app.institution_id'::text, true), ''::text))::uuid)
+(14 rows)
+
+     typname      |     enumlabel      
+------------------+--------------------
+ AttendanceStatus | ACTIVE
+ AttendanceStatus | VOID
+ ConsentStatus    | GRANTED
+ ConsentStatus    | REVOKED
+ CorrectionReason | REGISTRATION_ERROR
+ CorrectionReason | REVIEW_CONFIRMED
+ SessionStatus    | PLANNED
+ SessionStatus    | OPEN
+ SessionStatus    | CLOSED
+ SessionStatus    | CANCELLED
+ TemplateStatus   | DISABLED
+ TemplateStatus   | REVOKED
+ UserRole         | ADMIN
+ UserRole         | TEACHER
+(14 rows)
+
+           relname           | sel | ins | upd | del | trunc | trig | refs 
+-----------------------------+-----+-----+-----+-----+-------+------+------
+ _prisma_migrations          | f   | f   | f   | f   | f     | f    | f
+ attendance_corrections      | f   | f   | f   | f   | f     | f    | f
+ attendances                 | f   | f   | f   | f   | f     | f    | f
+ audit_events                | f   | f   | f   | f   | f     | f    | f
+ biometric_consents          | f   | f   | f   | f   | f     | f    | f
+ biometric_template_metadata | f   | f   | f   | f   | f     | f    | f
+ class_sessions              | f   | f   | f   | f   | f     | f    | f
+ devices                     | f   | f   | f   | f   | f     | f    | f
+ enrollments                 | f   | f   | f   | f   | f     | f    | f
+ groups                      | f   | f   | f   | f   | f     | f    | f
+ institutions                | f   | f   | f   | f   | f     | f    | f
+ students                    | f   | f   | f   | f   | f     | f    | f
+ teacher_assignments         | f   | f   | f   | f   | f     | f    | f
+ teachers                    | f   | f   | f   | f   | f     | f    | f
+ users                       | f   | f   | f   | f   | f     | f    | f
+(15 rows)
+
+    column_name     | app_update 
+--------------------+------------
+ institution_id     | f
+ id                 | f
+ event_uuid         | f
+ student_id         | f
+ group_id           | f
+ session_id         | f
+ device_id          | f
+ created_by         | f
+ schema_version     | f
+ method             | f
+ payload_hash       | f
+ occurred_at_client | f
+ received_at_server | f
+ status             | f
+ version            | f
+ enrollment_id      | f
+ transition_txid    | f
+(17 rows)
+
+     table_name     | rows 
+--------------------+------
+ _prisma_migrations |    2
+(1 row)
+
+       table_name       | rows 
+------------------------+------
+ attendance_corrections |    0
+(1 row)
+
+ table_name  | rows 
+-------------+------
+ attendances |    0
+(1 row)
+
+  table_name  | rows 
+--------------+------
+ audit_events |    0
+(1 row)
+
+     table_name     | rows 
+--------------------+------
+ biometric_consents |    0
+(1 row)
+
+         table_name          | rows 
+-----------------------------+------
+ biometric_template_metadata |    0
+(1 row)
+
+   table_name   | rows 
+----------------+------
+ class_sessions |    0
+(1 row)
+
+ table_name | rows 
+------------+------
+ devices    |    0
+(1 row)
+
+ table_name  | rows 
+-------------+------
+ enrollments |    0
+(1 row)
+
+ table_name | rows 
+------------+------
+ groups     |    0
+(1 row)
+
+  table_name  | rows 
+--------------+------
+ institutions |    0
+(1 row)
+
+ table_name | rows 
+------------+------
+ students   |    0
+(1 row)
+
+     table_name      | rows 
+---------------------+------
+ teacher_assignments |    0
+(1 row)
+
+ table_name | rows 
+------------+------
+ teachers   |    0
+(1 row)
+
+ table_name | rows 
+------------+------
+ users      |    0
+(1 row)
+
+ROLLBACK

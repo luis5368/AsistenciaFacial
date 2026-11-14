@@ -1,0 +1,29 @@
+{
+  "verified": true,
+  "commands": [
+    {
+      "args": [
+        "migrate",
+        "status"
+      ],
+      "exitCode": 0
+    }
+  ],
+  "history": [
+    {
+      "migration_name": "20261113000000_initial_review",
+      "checksum": "dc3a10d34f0d795fabe8ca6f769ccbc54c8e04ba655dc582b6f366a417a471bd",
+      "finished_at": "2026-11-14T01:26:45.390Z",
+      "rolled_back_at": null,
+      "applied_steps_count": 0
+    },
+    {
+      "migration_name": "20261114000000_corrections_enrollment_episodes",
+      "checksum": "4fd264537d9399f122b709c0368c51744c7344be03ed0802b671855cb29a6f2b",
+      "finished_at": "2026-11-14T01:26:47.181Z",
+      "rolled_back_at": null,
+      "applied_steps_count": 0
+    }
+  ],
+  "applicationHistoryReadDenied": true
+}

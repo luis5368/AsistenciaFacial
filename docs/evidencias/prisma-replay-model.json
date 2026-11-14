@@ -1,0 +1,14 @@
+{
+  "stage": "model",
+  "verified": true,
+  "migrations": [],
+  "counts": {
+    "tables": 14,
+    "columns": 98,
+    "constraints": 34,
+    "indexes": 39,
+    "enums": 14
+  },
+  "fingerprint": "736c41d371a0f28583b4e09ab90802429db344ee111ad7730b97e51df1d57cee",
+  "temporarySchemaAbsent": true
+}

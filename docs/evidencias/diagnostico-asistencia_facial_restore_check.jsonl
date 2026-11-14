@@ -1,0 +1,13 @@
+{"section":"identity","database":"asistencia_facial_restore_check","user":"postgres","host":"::1","port":5432,"readOnly":"on","observedAt":"2026-11-14T00:39:15.150818-06:00"}
+{"section":"database","data":[{"datname":"asistencia_facial_restore_check","owner":"postgres","datacl":null}]}
+{"section":"schemas","data":[{"nspname":"public","owner":"pg_database_owner","nspacl":["pg_database_owner=UC/pg_database_owner","=U/pg_database_owner"]}]}
+{"section":"tables","data":null}
+{"section":"policies","data":null}
+{"section":"indexes","data":null}
+{"section":"constraints","data":null}
+{"section":"triggers","data":null}
+{"section":"functions","data":null}
+{"section":"enums","data":null}
+{"section":"app_permissions","data":null}
+{"section":"app_column_updates","data":null}
+{"section":"role_permissions","data":[{"rolname":"asistencia_app","rolsuper":false,"rolcreatedb":false,"rolcreaterole":false,"rolreplication":false,"rolbypassrls":false,"connect":true,"dbcreate":false,"usage":true,"schemacreate":false},{"rolname":"asistencia_migrator","rolsuper":false,"rolcreatedb":false,"rolcreaterole":false,"rolreplication":false,"rolbypassrls":false,"connect":true,"dbcreate":false,"usage":true,"schemacreate":false}]}

@@ -1,0 +1,22 @@
+{
+  "tables": {
+    "enrollments": {
+      "count": 2,
+      "sha256": "dfd836804564143150ca40ec60c7d6b56ec35be2985d5f5cf0a0f498d50db909"
+    },
+    "attendances": {
+      "count": 3,
+      "sha256": "f6defd44acfbc289a953d2e6d833f606371d12580c49abc3c11877d655769a80"
+    },
+    "attendance_corrections": {
+      "count": 1,
+      "sha256": "247b94cd2bef34aafb378560c4176de231e79c59048cd300fd5bf2c71b728ed3"
+    },
+    "audit_events": {
+      "count": 1,
+      "sha256": "aba850af2e58d4421981a6a6946982ea9da0d575b9d5104e2778b8c1b044a29e"
+    }
+  },
+  "historicalOutsideEpisode": null,
+  "note": "Campo no medido antes del backfill; el cero inicial del arnes no era una observacion temporal. Huellas y conteos originales conservados."
+}

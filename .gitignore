@@ -1,0 +1,57 @@
+# Dependencies and builds
+node_modules/
+dist/
+build/
+coverage/
+.playwright/
+playwright-report/
+test-results/
+
+# Secrets
+.env
+.env.*
+!.env.example
+!.env.application.example
+*.pem
+*.key
+*.p12
+
+# Real personal/biometric data and local artifacts
+private_data/
+secrets/
+models/private/
+**/biometric_samples/
+**/embeddings_data/
+*.sqlite
+*.sqlite3
+*.db
+
+# Logs and temporary outputs
+*.log
+.tmp/
+.cache/
+.vscode/*.local.json
+.DS_Store
+Thumbs.db
+
+# Protección adicional del prototipo y artefactos de compilación.
+data/
+biometrics/
+datasets/
+uploads/
+backups/
+*.onnx
+*.tsbuildinfo
+.vite/
+~$*.docx
+apps/frontend/public/ort/
+
+# Exportaciones originales de ensayos: conservar localmente, sin versionar metadatos.
+Puebas/*.json
+pruebas/*.json
+
+# Cliente generado desde el esquema Prisma, sin datos.
+apps/backend/src/generated/
+
+# Documento fuente local: no publicar documentos originales potencialmente personales.
+docs/propuesta_original.docx

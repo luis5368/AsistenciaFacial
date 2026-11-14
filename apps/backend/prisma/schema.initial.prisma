@@ -1,0 +1,283 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserRole {
+  ADMIN
+  TEACHER
+}
+
+enum AttendanceStatus {
+  ACTIVE
+  VOID
+}
+
+enum ConsentStatus {
+  GRANTED
+  REVOKED
+}
+
+enum TemplateStatus {
+  DISABLED
+  REVOKED
+}
+
+enum SessionStatus {
+  PLANNED
+  OPEN
+  CLOSED
+  CANCELLED
+}
+
+enum CorrectionReason {
+  REGISTRATION_ERROR
+  REVIEW_CONFIRMED
+}
+
+model Institution {
+  id        String   @id @default(uuid()) @db.Uuid
+  name      String   @db.VarChar(160)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  users     User[]
+  students  Student[]
+  groups    Group[]
+
+  @@map("institutions")
+}
+
+model User {
+  institutionId String      @map("institution_id") @db.Uuid
+  id            String      @default(uuid()) @db.Uuid
+  email         String      @db.VarChar(254)
+  passwordHash  String      @map("password_hash") @db.VarChar(255)
+  role          UserRole
+  active        Boolean     @default(true)
+  createdAt     DateTime    @default(now()) @map("created_at") @db.Timestamptz(3)
+  institution   Institution @relation(fields: [institutionId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  teacher       Teacher?
+  devices       Device[]
+  attendances   Attendance[]
+  consents      BiometricConsent[]
+  corrections   AttendanceCorrection[]
+  auditEvents   AuditEvent[]
+
+  @@id([institutionId, id])
+  @@unique([institutionId, email])
+  @@map("users")
+}
+
+model Student {
+  institutionId String      @map("institution_id") @db.Uuid
+  id            String      @default(uuid()) @db.Uuid
+  studentCode   String      @map("student_code") @db.VarChar(64)
+  fullName      String      @map("full_name") @db.VarChar(200)
+  active        Boolean     @default(true)
+  institution   Institution @relation(fields: [institutionId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  enrollments   Enrollment[]
+  consents      BiometricConsent[]
+
+  @@id([institutionId, id])
+  @@unique([institutionId, studentCode])
+  @@map("students")
+}
+
+model Teacher {
+  institutionId String @map("institution_id") @db.Uuid
+  id            String @default(uuid()) @db.Uuid
+  userId        String @map("user_id") @db.Uuid
+  user          User   @relation(fields: [institutionId, userId], references: [institutionId, id], onDelete: Restrict, onUpdate: Restrict)
+  assignments   TeacherAssignment[]
+
+  @@id([institutionId, id])
+  @@unique([institutionId, userId])
+  @@map("teachers")
+}
+
+model Group {
+  institutionId String      @map("institution_id") @db.Uuid
+  id            String      @default(uuid()) @db.Uuid
+  grade         String      @db.VarChar(80)
+  section       String      @db.VarChar(40)
+  schoolYear    Int         @map("school_year")
+  institution   Institution @relation(fields: [institutionId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  enrollments   Enrollment[]
+  assignments   TeacherAssignment[]
+  sessions      ClassSession[]
+
+  @@id([institutionId, id])
+  @@unique([institutionId, schoolYear, grade, section])
+  @@map("groups")
+}
+
+model Enrollment {
+  institutionId String   @map("institution_id") @db.Uuid
+  id            String   @default(uuid()) @db.Uuid
+  studentId     String   @map("student_id") @db.Uuid
+  groupId       String   @map("group_id") @db.Uuid
+  startsAt      DateTime @map("starts_at") @db.Timestamptz(3)
+  endsAt        DateTime? @map("ends_at") @db.Timestamptz(3)
+  student       Student  @relation(fields: [institutionId, studentId], references: [institutionId, id], onDelete: Restrict, onUpdate: Restrict)
+  group         Group    @relation(fields: [institutionId, groupId], references: [institutionId, id], onDelete: Restrict, onUpdate: Restrict)
+  attendances   Attendance[]
+
+  @@id([institutionId, id])
+  @@unique([institutionId, studentId, groupId])
+  @@index([institutionId, groupId])
+  @@map("enrollments")
+}
+
+model TeacherAssignment {
+  institutionId String  @map("institution_id") @db.Uuid
+  teacherId     String  @map("teacher_id") @db.Uuid
+  groupId       String  @map("group_id") @db.Uuid
+  active        Boolean @default(true)
+  teacher       Teacher @relation(fields: [institutionId, teacherId], references: [institutionId, id], onDelete: Restrict, onUpdate: Restrict)
+  group         Group   @relation(fields: [institutionId, groupId], references: [institutionId, id], onDelete: Restrict, onUpdate: Restrict)
+
+  @@id([institutionId, teacherId, groupId])
+  @@index([institutionId, groupId])
+  @@map("teacher_assignments")
+}
+
+model ClassSession {
+  institutionId String        @map("institution_id") @db.Uuid
+  id            String        @default(uuid()) @db.Uuid
+  groupId       String        @map("group_id") @db.Uuid
+  startsAt      DateTime      @map("starts_at") @db.Timestamptz(3)
+  endsAt        DateTime      @map("ends_at") @db.Timestamptz(3)
+  status        SessionStatus @default(PLANNED)
+  group         Group         @relation(fields: [institutionId, groupId], references: [institutionId, id], onDelete: Restrict, onUpdate: Restrict)
+  attendances   Attendance[]
+
+  @@id([institutionId, id])
+  @@unique([institutionId, id, groupId])
+  @@index([institutionId, groupId, startsAt])
+  @@map("class_sessions")
+}
+
+model Device {
+  institutionId String    @map("institution_id") @db.Uuid
+  id            String    @default(uuid()) @db.Uuid
+  assignedUserId String   @map("assigned_user_id") @db.Uuid
+  expiresAt     DateTime  @map("expires_at") @db.Timestamptz(3)
+  revokedAt     DateTime? @map("revoked_at") @db.Timestamptz(3)
+  assignedUser  User      @relation(fields: [institutionId, assignedUserId], references: [institutionId, id], onDelete: Restrict, onUpdate: Restrict)
+  attendances   Attendance[]
+
+  @@id([institutionId, id])
+  @@index([institutionId, assignedUserId])
+  @@map("devices")
+}
+
+model BiometricConsent {
+  institutionId String        @map("institution_id") @db.Uuid
+  id            String        @default(uuid()) @db.Uuid
+  studentId     String        @map("student_id") @db.Uuid
+  recordedBy    String        @map("recorded_by") @db.Uuid
+  status        ConsentStatus @default(GRANTED)
+  noticeVersion String        @map("notice_version") @db.VarChar(40)
+  evidenceRef   String        @map("evidence_ref") @db.Uuid
+  grantedAt     DateTime      @map("granted_at") @db.Timestamptz(3)
+  expiresAt     DateTime      @map("expires_at") @db.Timestamptz(3)
+  revokedAt     DateTime?     @map("revoked_at") @db.Timestamptz(3)
+  student       Student       @relation(fields: [institutionId, studentId], references: [institutionId, id], onDelete: Restrict, onUpdate: Restrict)
+  actor         User          @relation(fields: [institutionId, recordedBy], references: [institutionId, id], onDelete: Restrict, onUpdate: Restrict)
+  templates     BiometricTemplateMetadata[]
+
+  @@id([institutionId, id])
+  @@unique([institutionId, id, studentId])
+  @@index([institutionId, studentId, status])
+  @@index([institutionId, recordedBy])
+  @@map("biometric_consents")
+}
+
+/// Reserva de metadatos: NO admite imágenes, embeddings, claves ni rutas a vectores.
+model BiometricTemplateMetadata {
+  institutionId String         @map("institution_id") @db.Uuid
+  id            String         @default(uuid()) @db.Uuid
+  studentId     String         @map("student_id") @db.Uuid
+  consentId     String         @map("consent_id") @db.Uuid
+  modelName     String         @map("model_name") @db.VarChar(80)
+  modelVersion  String         @map("model_version") @db.VarChar(80)
+  status        TemplateStatus @default(DISABLED)
+  createdAt     DateTime       @default(now()) @map("created_at") @db.Timestamptz(3)
+  revokedAt     DateTime?      @map("revoked_at") @db.Timestamptz(3)
+  consent       BiometricConsent @relation(fields: [institutionId, consentId, studentId], references: [institutionId, id, studentId], onDelete: Restrict, onUpdate: Restrict)
+
+  @@id([institutionId, id])
+  @@index([institutionId, consentId, studentId])
+  @@map("biometric_template_metadata")
+}
+
+model Attendance {
+  institutionId String           @map("institution_id") @db.Uuid
+  id            String           @default(uuid()) @db.Uuid
+  eventUuid     String           @map("event_uuid") @db.Uuid
+  studentId     String           @map("student_id") @db.Uuid
+  groupId       String           @map("group_id") @db.Uuid
+  sessionId     String           @map("session_id") @db.Uuid
+  deviceId      String           @map("device_id") @db.Uuid
+  createdBy     String           @map("created_by") @db.Uuid
+  schemaVersion Int              @default(1) @map("schema_version")
+  method        String           @default("manual") @db.VarChar(24)
+  payloadHash   String           @map("payload_hash") @db.Char(64)
+  occurredAtClient DateTime      @map("occurred_at_client") @db.Timestamptz(3)
+  receivedAtServer DateTime      @default(now()) @map("received_at_server") @db.Timestamptz(3)
+  status        AttendanceStatus @default(ACTIVE)
+  version       Int              @default(1)
+  enrollment    Enrollment       @relation(fields: [institutionId, studentId, groupId], references: [institutionId, studentId, groupId], onDelete: Restrict, onUpdate: Restrict)
+  session       ClassSession     @relation(fields: [institutionId, sessionId, groupId], references: [institutionId, id, groupId], onDelete: Restrict, onUpdate: Restrict)
+  device        Device           @relation(fields: [institutionId, deviceId], references: [institutionId, id], onDelete: Restrict, onUpdate: Restrict)
+  actor         User             @relation(fields: [institutionId, createdBy], references: [institutionId, id], onDelete: Restrict, onUpdate: Restrict)
+  corrections   AttendanceCorrection[]
+
+  @@id([institutionId, id])
+  @@unique([institutionId, eventUuid])
+  @@index([institutionId, sessionId, groupId])
+  @@index([institutionId, studentId, groupId])
+  @@index([institutionId, deviceId])
+  @@index([institutionId, createdBy])
+  // Unicidad parcial ACTIVE en migration.sql (Prisma no la declara aquí).
+  @@map("attendances")
+}
+
+model AttendanceCorrection {
+  institutionId String           @map("institution_id") @db.Uuid
+  id            String           @default(uuid()) @db.Uuid
+  attendanceId  String           @map("attendance_id") @db.Uuid
+  actorId       String           @map("actor_id") @db.Uuid
+  fromVersion   Int              @map("from_version")
+  toVersion     Int              @map("to_version")
+  fromStatus    AttendanceStatus @map("from_status")
+  toStatus      AttendanceStatus @map("to_status")
+  reason        CorrectionReason
+  recordedAt    DateTime         @default(now()) @map("recorded_at") @db.Timestamptz(3)
+  attendance    Attendance       @relation(fields: [institutionId, attendanceId], references: [institutionId, id], onDelete: Restrict, onUpdate: Restrict)
+  actor         User             @relation(fields: [institutionId, actorId], references: [institutionId, id], onDelete: Restrict, onUpdate: Restrict)
+
+  @@id([institutionId, id])
+  @@unique([institutionId, attendanceId, toVersion])
+  @@index([institutionId, actorId])
+  @@map("attendance_corrections")
+}
+
+model AuditEvent {
+  institutionId String   @map("institution_id") @db.Uuid
+  id            String   @default(uuid()) @db.Uuid
+  actorId       String   @map("actor_id") @db.Uuid
+  action        String   @db.VarChar(64)
+  resourceType  String   @map("resource_type") @db.VarChar(40)
+  resourceId    String   @map("resource_id") @db.Uuid
+  recordedAt    DateTime @default(now()) @map("recorded_at") @db.Timestamptz(3)
+  actor         User     @relation(fields: [institutionId, actorId], references: [institutionId, id], onDelete: Restrict, onUpdate: Restrict)
+
+  @@id([institutionId, id])
+  @@index([institutionId, resourceType, resourceId, recordedAt])
+  @@index([institutionId, actorId])
+  @@map("audit_events")
+}

@@ -1,0 +1,22 @@
+{
+  "name": "asistencia-facial",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Preparación del prototipo de asistencia offline-first",
+  "workspaces": [
+    "apps/frontend",
+    "apps/backend"
+  ],
+  "scripts": {
+    "dev": "npm run dev -w apps/frontend",
+    "build": "npm run build -w apps/frontend",
+    "preview": "npm run preview -w apps/frontend",
+    "typecheck": "npm run typecheck -w apps/frontend",
+    "test": "npm run test -w apps/frontend",
+    "test:e2e": "npm run test:e2e -w apps/frontend",
+    "assets": "node scripts/prepare-assets.mjs"
+  },
+  "engines": {
+    "node": ">=24.0.0 <25"
+  }
+}

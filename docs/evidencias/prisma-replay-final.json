@@ -1,0 +1,26 @@
+{
+  "stage": "final",
+  "verified": true,
+  "migrations": [
+    {
+      "name": "20261113000000_initial_review",
+      "sha256": "dc3a10d34f0d795fabe8ca6f769ccbc54c8e04ba655dc582b6f366a417a471bd"
+    },
+    {
+      "name": "20261114000000_corrections_enrollment_episodes",
+      "sha256": "4fd264537d9399f122b709c0368c51744c7344be03ed0802b671855cb29a6f2b"
+    }
+  ],
+  "counts": {
+    "tables": 14,
+    "columns": 98,
+    "constraints": 142,
+    "indexes": 41,
+    "triggers": 9,
+    "functions": 8,
+    "enums": 14,
+    "policies": 14
+  },
+  "fingerprint": "b2f2d3aedd9bdd8accdafb264624a2a8b9ec3180e1db09d72e16dc52c37a02ff",
+  "temporarySchemaAbsent": true
+}

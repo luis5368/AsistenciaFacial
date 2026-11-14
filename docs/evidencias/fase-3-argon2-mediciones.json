@@ -1,0 +1,58 @@
+{
+  "observedAt": "2026-11-14T05:27:15.646Z",
+  "node": "v24.20.0",
+  "platform": "win32",
+  "profile": {
+    "memory": 19456,
+    "passes": 2,
+    "parallelism": 1,
+    "tagLength": 32
+  },
+  "samples": [
+    {
+      "hashMs": 31.303399999999996,
+      "verifyMs": 30.52239999999999
+    },
+    {
+      "hashMs": 29.760400000000004,
+      "verifyMs": 29.421700000000016
+    },
+    {
+      "hashMs": 32.7492,
+      "verifyMs": 28.890299999999996
+    },
+    {
+      "hashMs": 31.250800000000027,
+      "verifyMs": 28.365599999999972
+    },
+    {
+      "hashMs": 38.429100000000005,
+      "verifyMs": 48.02710000000002
+    },
+    {
+      "hashMs": 35.66839999999996,
+      "verifyMs": 30.459099999999978
+    },
+    {
+      "hashMs": 30.89300000000003,
+      "verifyMs": 40.28230000000008
+    },
+    {
+      "hashMs": 37.21780000000001,
+      "verifyMs": 32.52380000000005
+    },
+    {
+      "hashMs": 30.766700000000014,
+      "verifyMs": 30.399999999999977
+    },
+    {
+      "hashMs": 28.13119999999992,
+      "verifyMs": 28.09439999999995
+    }
+  ],
+  "meanHashMs": 32.617,
+  "meanVerifyMs": 32.69867000000001,
+  "rssBeforeBytes": 54788096,
+  "rssAfterBytes": 55066624,
+  "limitation": "RSS is process-wide, not peak Argon memory. Sequential local samples; no load benchmark."
+}

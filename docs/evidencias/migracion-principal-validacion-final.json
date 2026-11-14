@@ -1,0 +1,441 @@
+{
+  "passed": true,
+  "tables": [
+    {
+      "relname": "_prisma_migrations",
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "owner": "asistencia_migrator"
+    },
+    {
+      "relname": "attendance_corrections",
+      "relrowsecurity": true,
+      "relforcerowsecurity": true,
+      "owner": "asistencia_migrator"
+    },
+    {
+      "relname": "attendances",
+      "relrowsecurity": true,
+      "relforcerowsecurity": true,
+      "owner": "asistencia_migrator"
+    },
+    {
+      "relname": "audit_events",
+      "relrowsecurity": true,
+      "relforcerowsecurity": true,
+      "owner": "asistencia_migrator"
+    },
+    {
+      "relname": "biometric_consents",
+      "relrowsecurity": true,
+      "relforcerowsecurity": true,
+      "owner": "asistencia_migrator"
+    },
+    {
+      "relname": "biometric_template_metadata",
+      "relrowsecurity": true,
+      "relforcerowsecurity": true,
+      "owner": "asistencia_migrator"
+    },
+    {
+      "relname": "class_sessions",
+      "relrowsecurity": true,
+      "relforcerowsecurity": true,
+      "owner": "asistencia_migrator"
+    },
+    {
+      "relname": "devices",
+      "relrowsecurity": true,
+      "relforcerowsecurity": true,
+      "owner": "asistencia_migrator"
+    },
+    {
+      "relname": "enrollments",
+      "relrowsecurity": true,
+      "relforcerowsecurity": true,
+      "owner": "asistencia_migrator"
+    },
+    {
+      "relname": "groups",
+      "relrowsecurity": true,
+      "relforcerowsecurity": true,
+      "owner": "asistencia_migrator"
+    },
+    {
+      "relname": "institutions",
+      "relrowsecurity": true,
+      "relforcerowsecurity": true,
+      "owner": "asistencia_migrator"
+    },
+    {
+      "relname": "students",
+      "relrowsecurity": true,
+      "relforcerowsecurity": true,
+      "owner": "asistencia_migrator"
+    },
+    {
+      "relname": "teacher_assignments",
+      "relrowsecurity": true,
+      "relforcerowsecurity": true,
+      "owner": "asistencia_migrator"
+    },
+    {
+      "relname": "teachers",
+      "relrowsecurity": true,
+      "relforcerowsecurity": true,
+      "owner": "asistencia_migrator"
+    },
+    {
+      "relname": "users",
+      "relrowsecurity": true,
+      "relforcerowsecurity": true,
+      "owner": "asistencia_migrator"
+    }
+  ],
+  "counts": {
+    "_prisma_migrations": 2,
+    "attendance_corrections": 0,
+    "attendances": 0,
+    "audit_events": 0,
+    "biometric_consents": 0,
+    "biometric_template_metadata": 0,
+    "class_sessions": 0,
+    "devices": 0,
+    "enrollments": 0,
+    "groups": 0,
+    "institutions": 0,
+    "students": 0,
+    "teacher_assignments": 0,
+    "teachers": 0,
+    "users": 0
+  },
+  "history": [
+    {
+      "migration_name": "20261113000000_initial_review",
+      "checksum": "dc3a10d34f0d795fabe8ca6f769ccbc54c8e04ba655dc582b6f366a417a471bd",
+      "finished_at": "2026-11-14T03:53:17.135Z",
+      "rolled_back_at": null,
+      "applied_steps_count": 1
+    },
+    {
+      "migration_name": "20261114000000_corrections_enrollment_episodes",
+      "checksum": "4fd264537d9399f122b709c0368c51744c7344be03ed0802b671855cb29a6f2b",
+      "finished_at": "2026-11-14T03:53:17.159Z",
+      "rolled_back_at": null,
+      "applied_steps_count": 1
+    }
+  ],
+  "privileges": [
+    {
+      "table": "_prisma_migrations",
+      "SELECT": false,
+      "INSERT": false,
+      "UPDATE": false,
+      "DELETE": false,
+      "TRUNCATE": false,
+      "REFERENCES": false,
+      "TRIGGER": false
+    },
+    {
+      "table": "attendance_corrections",
+      "SELECT": true,
+      "INSERT": true,
+      "UPDATE": false,
+      "DELETE": false,
+      "TRUNCATE": false,
+      "REFERENCES": false,
+      "TRIGGER": false
+    },
+    {
+      "table": "attendances",
+      "SELECT": true,
+      "INSERT": true,
+      "UPDATE": false,
+      "DELETE": false,
+      "TRUNCATE": false,
+      "REFERENCES": false,
+      "TRIGGER": false
+    },
+    {
+      "table": "audit_events",
+      "SELECT": true,
+      "INSERT": true,
+      "UPDATE": false,
+      "DELETE": false,
+      "TRUNCATE": false,
+      "REFERENCES": false,
+      "TRIGGER": false
+    },
+    {
+      "table": "biometric_consents",
+      "SELECT": true,
+      "INSERT": true,
+      "UPDATE": true,
+      "DELETE": false,
+      "TRUNCATE": false,
+      "REFERENCES": false,
+      "TRIGGER": false
+    },
+    {
+      "table": "biometric_template_metadata",
+      "SELECT": false,
+      "INSERT": false,
+      "UPDATE": false,
+      "DELETE": false,
+      "TRUNCATE": false,
+      "REFERENCES": false,
+      "TRIGGER": false
+    },
+    {
+      "table": "class_sessions",
+      "SELECT": true,
+      "INSERT": true,
+      "UPDATE": true,
+      "DELETE": false,
+      "TRUNCATE": false,
+      "REFERENCES": false,
+      "TRIGGER": false
+    },
+    {
+      "table": "devices",
+      "SELECT": true,
+      "INSERT": true,
+      "UPDATE": true,
+      "DELETE": false,
+      "TRUNCATE": false,
+      "REFERENCES": false,
+      "TRIGGER": false
+    },
+    {
+      "table": "enrollments",
+      "SELECT": true,
+      "INSERT": true,
+      "UPDATE": true,
+      "DELETE": false,
+      "TRUNCATE": false,
+      "REFERENCES": false,
+      "TRIGGER": false
+    },
+    {
+      "table": "groups",
+      "SELECT": true,
+      "INSERT": true,
+      "UPDATE": true,
+      "DELETE": false,
+      "TRUNCATE": false,
+      "REFERENCES": false,
+      "TRIGGER": false
+    },
+    {
+      "table": "institutions",
+      "SELECT": true,
+      "INSERT": true,
+      "UPDATE": true,
+      "DELETE": false,
+      "TRUNCATE": false,
+      "REFERENCES": false,
+      "TRIGGER": false
+    },
+    {
+      "table": "students",
+      "SELECT": true,
+      "INSERT": true,
+      "UPDATE": true,
+      "DELETE": false,
+      "TRUNCATE": false,
+      "REFERENCES": false,
+      "TRIGGER": false
+    },
+    {
+      "table": "teacher_assignments",
+      "SELECT": true,
+      "INSERT": true,
+      "UPDATE": true,
+      "DELETE": false,
+      "TRUNCATE": false,
+      "REFERENCES": false,
+      "TRIGGER": false
+    },
+    {
+      "table": "teachers",
+      "SELECT": true,
+      "INSERT": true,
+      "UPDATE": true,
+      "DELETE": false,
+      "TRUNCATE": false,
+      "REFERENCES": false,
+      "TRIGGER": false
+    },
+    {
+      "table": "users",
+      "SELECT": true,
+      "INSERT": true,
+      "UPDATE": true,
+      "DELETE": false,
+      "TRUNCATE": false,
+      "REFERENCES": false,
+      "TRIGGER": false
+    }
+  ],
+  "updateColumns": [
+    {
+      "column_name": "institution_id",
+      "allowed": false
+    },
+    {
+      "column_name": "id",
+      "allowed": false
+    },
+    {
+      "column_name": "event_uuid",
+      "allowed": false
+    },
+    {
+      "column_name": "student_id",
+      "allowed": false
+    },
+    {
+      "column_name": "group_id",
+      "allowed": false
+    },
+    {
+      "column_name": "session_id",
+      "allowed": false
+    },
+    {
+      "column_name": "device_id",
+      "allowed": false
+    },
+    {
+      "column_name": "created_by",
+      "allowed": false
+    },
+    {
+      "column_name": "schema_version",
+      "allowed": false
+    },
+    {
+      "column_name": "method",
+      "allowed": false
+    },
+    {
+      "column_name": "payload_hash",
+      "allowed": false
+    },
+    {
+      "column_name": "occurred_at_client",
+      "allowed": false
+    },
+    {
+      "column_name": "received_at_server",
+      "allowed": false
+    },
+    {
+      "column_name": "status",
+      "allowed": true
+    },
+    {
+      "column_name": "version",
+      "allowed": true
+    },
+    {
+      "column_name": "enrollment_id",
+      "allowed": false
+    },
+    {
+      "column_name": "transition_txid",
+      "allowed": false
+    }
+  ],
+  "triggers": [
+    {
+      "tgname": "attendance_correction_required",
+      "tgenabled": "O",
+      "tgdeferrable": true,
+      "tginitdeferred": true
+    },
+    {
+      "tgname": "attendance_episode_guard",
+      "tgenabled": "O",
+      "tgdeferrable": false,
+      "tginitdeferred": false
+    },
+    {
+      "tgname": "attendance_guard",
+      "tgenabled": "O",
+      "tgdeferrable": false,
+      "tginitdeferred": false
+    },
+    {
+      "tgname": "audit_append_only",
+      "tgenabled": "O",
+      "tgdeferrable": false,
+      "tginitdeferred": false
+    },
+    {
+      "tgname": "audit_requires_correction",
+      "tgenabled": "O",
+      "tgdeferrable": true,
+      "tginitdeferred": true
+    },
+    {
+      "tgname": "correction_append_only",
+      "tgenabled": "O",
+      "tgdeferrable": false,
+      "tginitdeferred": false
+    },
+    {
+      "tgname": "correction_requires_transition",
+      "tgenabled": "O",
+      "tgdeferrable": true,
+      "tginitdeferred": true
+    },
+    {
+      "tgname": "correction_transaction",
+      "tgenabled": "O",
+      "tgdeferrable": false,
+      "tginitdeferred": false
+    },
+    {
+      "tgname": "enrollment_period_guard",
+      "tgenabled": "O",
+      "tgdeferrable": false,
+      "tginitdeferred": false
+    }
+  ],
+  "roles": [
+    {
+      "rolname": "asistencia_app",
+      "rolsuper": false,
+      "rolcreatedb": false,
+      "rolcreaterole": false,
+      "rolreplication": false,
+      "rolbypassrls": false,
+      "create_db": false,
+      "temp": false,
+      "create_schema": false
+    },
+    {
+      "rolname": "asistencia_migrator",
+      "rolsuper": false,
+      "rolcreatedb": false,
+      "rolcreaterole": false,
+      "rolreplication": false,
+      "rolbypassrls": false,
+      "create_db": false,
+      "temp": false,
+      "create_schema": false
+    }
+  ],
+  "withoutContext": 0,
+  "historyAccessDenied": "42501",
+  "integrity": {
+    "columns": "98",
+    "fk": "20",
+    "checks": "12",
+    "indexes": "41",
+    "functions": "8",
+    "policies": "14",
+    "enums": "6"
+  }
+}

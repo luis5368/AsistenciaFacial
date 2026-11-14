@@ -1,0 +1,72 @@
+{
+    "host": "::1",
+    "port": 5432,
+    "actor": "asistencia_app",
+    "roles": [
+        {
+            "name": "asistencia_app",
+            "temp": true,
+            "login": true,
+            "connect": true,
+            "createdb": false,
+            "bypassrls": false,
+            "create_db": false,
+            "superuser": false,
+            "createrole": false,
+            "replication": false,
+            "usage_public": true,
+            "create_public": false
+        },
+        {
+            "name": "asistencia_migrator",
+            "temp": true,
+            "login": true,
+            "connect": true,
+            "createdb": false,
+            "bypassrls": false,
+            "create_db": false,
+            "superuser": false,
+            "createrole": false,
+            "replication": false,
+            "usage_public": true,
+            "create_public": false
+        }
+    ],
+    "types": [
+    ],
+    "schemas": [
+        {
+            "acl": [
+                "pg_database_owner=UC/pg_database_owner",
+                "=U/pg_database_owner"
+            ],
+            "name": "public",
+            "owner": "pg_database_owner"
+        }
+    ],
+    "database": "asistencia_facial",
+    "functions": [
+    ],
+    "read_only": "on",
+    "relations": [
+    ],
+    "checked_at": "2026-11-13T20:48:26.060289-06:00",
+    "extensions": [
+        "plpgsql"
+    ],
+    "default_acl": [
+    ],
+    "memberships": [
+    ],
+    "database_acl": {
+        "acl": [
+            "=Tc/postgres",
+            "postgres=CTc/postgres",
+            "asistencia_app=c/postgres"
+        ],
+        "owner": "postgres"
+    },
+    "server_version": "18.6",
+    "large_object_count": 0,
+    "event_trigger_count": 0
+}

@@ -1,0 +1,19 @@
+{
+  "principalDifferences": [],
+  "destinationChanges": [],
+  "sourceDestinationDifferences": [
+    "database_acl"
+  ],
+  "sourceDatabaseAcl": {
+    "acl": [
+      "=Tc/postgres",
+      "postgres=CTc/postgres",
+      "asistencia_app=c/postgres"
+    ],
+    "owner": "postgres"
+  },
+  "destinationDatabaseAcl": {
+    "acl": null,
+    "owner": "postgres"
+  }
+}

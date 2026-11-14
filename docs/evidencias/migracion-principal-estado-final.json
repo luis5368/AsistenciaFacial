@@ -1,0 +1,467 @@
+{
+    "host": "::1",
+    "port": 5432,
+    "actor": "asistencia_app",
+    "roles": [
+        {
+            "name": "asistencia_app",
+            "temp": false,
+            "login": true,
+            "connect": true,
+            "createdb": false,
+            "bypassrls": false,
+            "create_db": false,
+            "superuser": false,
+            "createrole": false,
+            "replication": false,
+            "usage_public": true,
+            "create_public": false
+        },
+        {
+            "name": "asistencia_migrator",
+            "temp": false,
+            "login": true,
+            "connect": true,
+            "createdb": false,
+            "bypassrls": false,
+            "create_db": false,
+            "superuser": false,
+            "createrole": false,
+            "replication": false,
+            "usage_public": true,
+            "create_public": false
+        }
+    ],
+    "types": [
+        "AttendanceStatus",
+        "ConsentStatus",
+        "CorrectionReason",
+        "SessionStatus",
+        "TemplateStatus",
+        "UserRole",
+        "_AttendanceStatus",
+        "_ConsentStatus",
+        "_CorrectionReason",
+        "_SessionStatus",
+        "_TemplateStatus",
+        "_UserRole",
+        "__prisma_migrations",
+        "_attendance_corrections",
+        "_attendances",
+        "_audit_events",
+        "_biometric_consents",
+        "_biometric_template_metadata",
+        "_class_sessions",
+        "_devices",
+        "_enrollments",
+        "_groups",
+        "_institutions",
+        "_prisma_migrations",
+        "_students",
+        "_teacher_assignments",
+        "_teachers",
+        "_users",
+        "attendance_corrections",
+        "attendances",
+        "audit_events",
+        "biometric_consents",
+        "biometric_template_metadata",
+        "class_sessions",
+        "devices",
+        "enrollments",
+        "groups",
+        "institutions",
+        "students",
+        "teacher_assignments",
+        "teachers",
+        "users"
+    ],
+    "schemas": [
+        {
+            "acl": [
+                "pg_database_owner=UC/pg_database_owner",
+                "=U/pg_database_owner",
+                "asistencia_migrator=U/pg_database_owner",
+                "asistencia_app=U/pg_database_owner"
+            ],
+            "name": "public",
+            "owner": "pg_database_owner"
+        }
+    ],
+    "database": "asistencia_facial",
+    "functions": [
+        "forbid_history_mutation",
+        "guard_attendance",
+        "guard_attendance_episode",
+        "guard_enrollment_period",
+        "require_attendance_correction",
+        "require_audit_correction",
+        "require_correction_transition",
+        "stamp_correction_transaction"
+    ],
+    "read_only": "on",
+    "relations": [
+        {
+            "kind": "r",
+            "name": "_prisma_migrations",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "i",
+            "name": "_prisma_migrations_pkey",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "r",
+            "name": "attendance_corrections",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "i",
+            "name": "attendance_corrections_institution_id_actor_id_idx",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "i",
+            "name": "attendance_corrections_institution_id_attendance_id_to_vers_key",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "i",
+            "name": "attendance_corrections_pkey",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "r",
+            "name": "attendances",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "i",
+            "name": "attendances_institution_id_created_by_idx",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "i",
+            "name": "attendances_institution_id_device_id_idx",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "i",
+            "name": "attendances_institution_id_enrollment_id_student_id_group_id_id",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "i",
+            "name": "attendances_institution_id_event_uuid_key",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "i",
+            "name": "attendances_institution_id_session_id_group_id_idx",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "i",
+            "name": "attendances_institution_id_student_id_group_id_idx",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "i",
+            "name": "attendances_one_active_per_session",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "i",
+            "name": "attendances_pkey",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "r",
+            "name": "audit_events",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "i",
+            "name": "audit_events_institution_id_actor_id_idx",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "i",
+            "name": "audit_events_institution_id_resource_type_resource_id_recor_idx",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "i",
+            "name": "audit_events_pkey",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "i",
+            "name": "audit_one_per_correction",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "r",
+            "name": "biometric_consents",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "i",
+            "name": "biometric_consents_institution_id_id_student_id_key",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "i",
+            "name": "biometric_consents_institution_id_recorded_by_idx",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "i",
+            "name": "biometric_consents_institution_id_student_id_status_idx",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "i",
+            "name": "biometric_consents_pkey",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "r",
+            "name": "biometric_template_metadata",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "i",
+            "name": "biometric_template_metadata_institution_id_consent_id_stude_idx",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "i",
+            "name": "biometric_template_metadata_pkey",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "r",
+            "name": "class_sessions",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "i",
+            "name": "class_sessions_institution_id_group_id_starts_at_idx",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "i",
+            "name": "class_sessions_institution_id_id_group_id_key",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "i",
+            "name": "class_sessions_pkey",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "r",
+            "name": "devices",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "i",
+            "name": "devices_institution_id_assigned_user_id_idx",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "i",
+            "name": "devices_pkey",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "r",
+            "name": "enrollments",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "i",
+            "name": "enrollments_institution_id_group_id_idx",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "i",
+            "name": "enrollments_institution_id_id_student_id_group_id_key",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "i",
+            "name": "enrollments_institution_id_student_id_group_id_starts_at_idx",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "i",
+            "name": "enrollments_pkey",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "r",
+            "name": "groups",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "i",
+            "name": "groups_institution_id_school_year_grade_section_key",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "i",
+            "name": "groups_pkey",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "r",
+            "name": "institutions",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "i",
+            "name": "institutions_pkey",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "r",
+            "name": "students",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "i",
+            "name": "students_institution_id_student_code_key",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "i",
+            "name": "students_pkey",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "r",
+            "name": "teacher_assignments",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "i",
+            "name": "teacher_assignments_institution_id_group_id_idx",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "i",
+            "name": "teacher_assignments_pkey",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "r",
+            "name": "teachers",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "i",
+            "name": "teachers_institution_id_user_id_key",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "i",
+            "name": "teachers_pkey",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "r",
+            "name": "users",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "i",
+            "name": "users_institution_id_email_key",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        },
+        {
+            "kind": "i",
+            "name": "users_pkey",
+            "owner": "asistencia_migrator",
+            "schema": "public"
+        }
+    ],
+    "checked_at": "2026-11-13T22:19:40.596431-06:00",
+    "extensions": [
+        "plpgsql"
+    ],
+    "default_acl": [
+    ],
+    "memberships": [
+    ],
+    "database_acl": {
+        "acl": [
+            "=c/postgres",
+            "postgres=CTc/postgres",
+            "asistencia_app=c/postgres",
+            "asistencia_migrator=c/postgres"
+        ],
+        "owner": "postgres"
+    },
+    "server_version": "18.6",
+    "large_object_count": 0,
+    "event_trigger_count": 0
+}

@@ -1,0 +1,22 @@
+{
+  "stage": "initial",
+  "verified": true,
+  "migrations": [
+    {
+      "name": "20261113000000_initial_review",
+      "sha256": "dc3a10d34f0d795fabe8ca6f769ccbc54c8e04ba655dc582b6f366a417a471bd"
+    }
+  ],
+  "counts": {
+    "tables": 14,
+    "columns": 95,
+    "constraints": 136,
+    "indexes": 38,
+    "triggers": 4,
+    "functions": 3,
+    "enums": 14,
+    "policies": 14
+  },
+  "fingerprint": "5ac18b07b154519ad462765ac4d950ce54c7db3aeaeac5cacdb829d2883b1b8a",
+  "temporarySchemaAbsent": true
+}

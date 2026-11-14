@@ -1,0 +1,3 @@
+{"section":"user_status_counts","data":[{"role":"ADMIN","active":false,"total":1},{"role":"ADMIN","active":true,"total":3},{"role":"TEACHER","active":false,"total":3},{"role":"TEACHER","active":true,"total":1}]}
+{"section":"audit_counts","data":[{"action":"auth.password_changed","total":1},{"action":"student.updated","total":1},{"action":"user.updated","total":2}]}
+{"section":"assignment_counts","data":[{"active":false,"total":2},{"active":true,"total":2}]}
